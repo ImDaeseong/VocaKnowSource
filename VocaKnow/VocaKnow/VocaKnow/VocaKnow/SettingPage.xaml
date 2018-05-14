@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls ="clr-namespace:VocaKnow.controls"
+             xmlns:renderers="clr-namespace:VocaKnow.Renderers"
+             x:Class="VocaKnow.SettingPage"
+             BackgroundColor="White">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackLayout Padding="0">
+                    <controls:SettingImageButton x:Name="EnterClose" Text="설정"  BackgroundColor="#33A7D6" Click="EnterClose_Click"  />
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1" Padding="5, 5, 5, 5">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <ScrollView>
+                        <StackLayout Orientation="Vertical" Margin="5,0,5,0" Padding="0">
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                <renderers:IconView x:Name="iconview" Foreground="#33A7D6" VerticalOptions="Center" Source="info.png" Scale="0.7" HorizontalOptions="Start"/>
+                                <Label Text="이용 가이드" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerInfo_Tapped" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                         
+                            <Label Text="문장 자동 반복 시간(초)" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:BoxBorderEntry x:Name="set1" WidthRequest="300" HeightRequest="40"  />
+
+                            <Label Text="단어장 자동 반복 시간(초)" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:BoxBorderEntry x:Name="set2" WidthRequest="300" HeightRequest="40"  />
+      
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center" >
+                                    <Label Text="문장 음성 켜기:" TextColor="Black" VerticalOptions="Center"/>
+                                </StackLayout>
+
+                                <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" >
+                                    <renderers:ColorSwitch x:Name="set3" IsToggled="false" HorizontalOptions="End" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center" >
+                                    <Label Text="단어장 녹음 음성 켜기:" TextColor="Black" VerticalOptions="Center"/>
+                                </StackLayout>
+
+                                <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" >
+                                    <renderers:ColorSwitch x:Name="set4" IsToggled="false" HorizontalOptions="End" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="Center" >
+                                    <Label Text="스크린 화면 항상 켜기:" TextColor="Black" VerticalOptions="Center"/>
+                                </StackLayout>
+
+                                <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="Center" >
+                                    <renderers:ColorSwitch x:Name="set5" IsToggled="false" HorizontalOptions="End" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Vertical">
+                                <Label x:Name="lblSkin" Text="스킨 색상 선택" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="End"  HorizontalOptions="Start"/>
+                                <ScrollView HeightRequest="50" Orientation="Horizontal" BackgroundColor="Transparent">
+
+                                    <StackLayout Margin="0,0,0,0" Spacing="0" Orientation= "Horizontal" HorizontalOptions="StartAndExpand">
+                                       
+                                        <Frame x:Name="f1" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#33A7D6" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF1_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                        <Frame x:Name="f2" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#493335" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF2_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                        <Frame x:Name="f3" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#FF80AB" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF3_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                        <Frame x:Name="f4" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#4CAF50" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF4_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                        <Frame x:Name="f5" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#3F51B5" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF5_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                        <Frame x:Name="f6" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#B71C1C" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF6_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                        <Frame x:Name="f7" Margin="1,1,1,1" Padding="0" HasShadow="False" OutlineColor="Transparent" BackgroundColor="Transparent">
+                                            <Frame Margin="2,2,2,2" OutlineColor="Transparent" BackgroundColor="#37474F" Padding="0" WidthRequest = "50" HeightRequest = "30" HasShadow="False">
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizerF7_Tapped" />
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Frame>
+
+                                       
+                                    </StackLayout>
+
+                                </ScrollView>                            
+                            </StackLayout>
+
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </Grid>
+
+                       
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

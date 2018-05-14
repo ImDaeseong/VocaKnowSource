@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VocaKnow.MyKataCellView">
+  <ContentView.Content>
+      <Grid>
+          <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+          <Grid Grid.Column="0">
+              <StackLayout>
+                  <Label x:Name="lblKataIndo" Margin="5,0,5,0" TextColor="Black" FontSize="25" FontAttributes="Bold"/>
+                  <Label x:Name="lblKataIndoTambah" Margin="5,0,5,0" TextColor="Black" FontSize="25" FontAttributes="Bold"/>
+                  <Label x:Name="lblKataKor" Margin="5,0,5,0" TextColor="Gray" FontSize="18" />
+                  <BoxView  x:Name="boxLine" HeightRequest="0.4"  WidthRequest="1000" Margin="0,0,0,0" BackgroundColor="#33A7D6" />
+              </StackLayout>
+          </Grid>
+      </Grid>
+  </ContentView.Content>
+</ContentView>

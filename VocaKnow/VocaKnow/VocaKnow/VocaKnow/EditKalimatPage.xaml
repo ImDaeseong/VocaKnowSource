@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls ="clr-namespace:VocaKnow.controls"
+             xmlns:renderers="clr-namespace:VocaKnow.Renderers"
+             x:Class="VocaKnow.EditKalimatPage"
+             BackgroundColor="White">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    
+    <ContentPage.Content>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackLayout Padding="0">
+                <controls:SettingImageButton x:Name="EnterClose" Text="문장 편집" BackgroundColor="#33A7D6" Click="EnterClose_Click"  />
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1" Padding="5, 5, 5, 5">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <ScrollView>
+                        <StackLayout Orientation="Vertical" Margin="5,0,5,0" Padding="0">
+
+                            <Label Text="외국어" x:Name="lblIndo" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:CustomEditor  x:Name="KataIndo" WidthRequest="300" HeightRequest="150" />
+
+                            <Label Text="발음" x:Name="lblTambah" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:CustomEditor  x:Name="KataIndoTambah" WidthRequest="300" HeightRequest="150" />
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                                <renderers:TextButton Text="수정" TextColor="#33A7D6" WidthRequest="60" HeightRequest="35" x:Name="btnEdit" Clicked="btnEdit_Clicked" />
+                            </StackLayout>
+                            
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </Grid>
+            
+        </Grid>
+        
+    </ContentPage.Content>
+
+</ContentPage>

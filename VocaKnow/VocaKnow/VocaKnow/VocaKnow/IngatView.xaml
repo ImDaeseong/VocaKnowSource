@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls ="clr-namespace:VocaKnow.controls"
+             xmlns:renderers="clr-namespace:VocaKnow.Renderers"
+             xmlns:views ="clr-namespace:VocaKnow"
+             x:Class="VocaKnow.IngatView">
+
+    <RelativeLayout x:Name="relLayout">
+
+        <Grid HorizontalOptions="Center" VerticalOptions="Center"
+              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+			  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0" x:Name="PlayBoard" IsVisible="False">
+                <StackLayout x:Name="CounterMenu" HorizontalOptions="Start" VerticalOptions="Center" Margin="5,0,5,0" >
+                    <Label x:Name ="CounterTimer" FontSize="15" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center" />                    
+                </StackLayout>
+                <renderers:GestureFrame x:Name="Kataview" BackgroundColor="White" OutlineColor="White" Padding="2" SwipeLeft="Kataview_SwipeLeft" SwipeRight="Kataview_SwipeRight">
+                    <renderers:GestureFrame x:Name="Kataviewin"  BackgroundColor="#33A7D6" OutlineColor="White" HasShadow="False" Padding="0,0,5,0" SwipeLeft="Kataview_SwipeLeft" SwipeRight="Kataview_SwipeRight">
+                        <StackLayout VerticalOptions="CenterAndExpand" Spacing="0">
+                            <Label x:Name="KataIndo" HorizontalTextAlignment="Center" TextColor="White" FontSize="30" FontAttributes="Bold" Margin="5,5,5,10" />                            
+                            <Label x:Name="lembutlidah" HorizontalTextAlignment="Center" TextColor="White" FontSize="25" Margin="5,5,5,5" />
+                            <Label x:Name="KataKor"  HorizontalTextAlignment="Center" TextColor="White" FontSize="25" Margin="5,5,5,10"/>
+                        </StackLayout>
+                    </renderers:GestureFrame>
+                </renderers:GestureFrame>
+            </StackLayout>
+
+            <StackLayout x:Name="MarqueeMenu" Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,0,0,0" IsVisible="False">
+                <views:MarqueeView x:Name="mView" />               
+            </StackLayout>
+
+        </Grid>
+
+        <controls:FloatingActionButton x:Name="upPrePayImage" Image="DoubleLeft.png" ButtonColor="Gray" IsVisible="False" Clicked="TapGestureRecognizer_TappedPrePlayKata" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-358}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-295}" />
+
+        <controls:FloatingActionButton x:Name="upNextplayImage" Image="DoubleRight.png" ButtonColor="Gray" IsVisible="False" Clicked="TapGestureRecognizer_TappedNextPlayKata" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-57}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-295}" />
+
+        <controls:FloatingActionButton x:Name="playImage" Image="change.png" ButtonColor="Gray" Clicked="TapGestureRecognizer_TappedPlay" IsVisible="False"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}" />
+
+    </RelativeLayout>
+    
+</ContentView>

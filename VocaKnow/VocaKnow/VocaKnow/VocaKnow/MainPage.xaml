@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views ="clr-namespace:VocaKnow"
+             x:Class="VocaKnow.MainPage"
+             BackgroundColor="White">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+
+    <ContentPage.Content>
+
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
+
+            <ContentView SizeChanged="ChangeContent_SizeChanged" x:Name="ChangeContent" Grid.Column="0" Grid.Row="0"  >
+                <views:ListView />
+            </ContentView>
+
+            <BoxView x:Name="boxline" Grid.Column="0" Grid.Row="1" HeightRequest="0.1" Color="#33A7D6" />
+
+            <Grid Grid.Column="0" Grid.Row="2" RowSpacing="0" ColumnSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+               
+                <StackLayout x:Name="sl1"  Orientation="Vertical" VerticalOptions="End" Grid.Column="0" Grid.Row="0" >
+                    <Image x:Name="tabImg1" />
+                    <Label x:Name="tab1" Text="목록" TextColor="#5A297D" FontSize="11" HorizontalTextAlignment="Center" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerList_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout x:Name="sl2" Orientation="Vertical" VerticalOptions="End" Grid.Column="1" Grid.Row="0">
+                    <Image x:Name="tabImg2" />
+                    <Label x:Name="tab2" Text="문장" TextColor="#5A297D" FontSize="11" HorizontalTextAlignment="Center" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerAll_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout x:Name="sl3" Orientation="Vertical" VerticalOptions="End" Grid.Column="2" Grid.Row="0">
+                    <Image x:Name="tabImg3"  />
+                    <Label x:Name="tab3" Text="단어장" TextColor="#5A297D" FontSize="11" HorizontalTextAlignment="Center" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerIngatMyKata_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+                
+                <StackLayout x:Name="sl4" Orientation="Vertical" VerticalOptions="End" Grid.Column="3" Grid.Row="0">
+                    <Image x:Name="tabImg4" />
+                    <Label x:Name="tab4" Text="나의 단어장" TextColor="#5A297D" FontSize="11" HorizontalTextAlignment="Center" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerMyKata_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout x:Name="sl5" Orientation="Vertical" VerticalOptions="End" Grid.Column="4" Grid.Row="0">
+                    <Image x:Name="tabImg5" />
+                    <Label x:Name="tab5" Text="설정" TextColor="#5A297D" FontSize="11" HorizontalTextAlignment="Center" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizerSetMyKata_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VocaKnow.ListViewCell">
+    <ContentView.Content>        
+        <Frame x:Name="frameViewCell" 
+            HeightRequest="40"
+ 			Margin="5,5,5,5"			
+			Padding="0"
+			HasShadow="false"
+			CornerRadius="3"
+			BackgroundColor="#33A7D6"
+ 			HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid ColumnSpacing="0"	RowSpacing="0">
+                <Label x:Name="FolderName" Text="{Binding sName}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+            </Frame.GestureRecognizers>            
+        </Frame>
+    </ContentView.Content>    
+</ContentView>

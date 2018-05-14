@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls ="clr-namespace:VocaKnow.controls"
+             xmlns:renderers="clr-namespace:VocaKnow.Renderers"
+             x:Class="VocaKnow.UserGuidePage"
+             BackgroundColor="White">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    
+    <ContentPage.Content>
+        
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <renderers:ImageCarousel x:Name="carouselImg" Grid.RowSpan="2" Images="{Binding Images}" />   
+            <StackLayout Grid.Row="1" BackgroundColor="#80000000" Padding="0">
+                <controls:SettingImageButton x:Name="EnterClose" Text="이용 가이드" HorizontalOptions="Center" Click="EnterClose_Click"   />
+            </StackLayout>
+        </Grid>
+        
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls ="clr-namespace:VocaKnow.controls"
+             xmlns:renderers="clr-namespace:VocaKnow.Renderers"
+             x:Class="VocaKnow.NewKataPage"
+             BackgroundColor="White">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    
+    
+    <RelativeLayout x:Name="relLayout">
+        
+        <Grid 
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+			RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackLayout Padding="0">
+                    <controls:SettingImageButton x:Name="EnterClose" BackgroundColor="#33A7D6" Click="EnterClose_Click"  />
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1" Padding="5, 5, 5, 5">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+                    <ScrollView>
+                        <StackLayout Orientation="Vertical" Margin="5,0,5,0" Padding="0">
+                            
+                            <Label Text="외국어1" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:BoxBorderEntry x:Name="KataIndo" WidthRequest="300" HeightRequest="40"  />
+
+                            <Label Text="외국어2" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:BoxBorderEntry x:Name="KataIndoTambah" WidthRequest="300" HeightRequest="40"  />
+
+                            <Label Text="한국어" HorizontalTextAlignment="Center" TextColor="Black" HeightRequest="20" VerticalOptions="Center"  HorizontalOptions="Start"/>
+                            <renderers:BoxBorderEntry x:Name="KataKor" WidthRequest="300" HeightRequest="40"  />
+
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                <renderers:TextButton Text="저장" IsVisible="False" TextColor="#33A7D6" WidthRequest="60" HeightRequest="35" x:Name="btnSave" Clicked="btnSave_Clicked"/>
+                                <renderers:TextButton Text="수정" IsVisible="False" TextColor="#33A7D6" WidthRequest="60" HeightRequest="35" x:Name="btnEdit" Clicked="btnEdit_Clicked"/>
+                                <renderers:TextButton Text="삭제" IsVisible="False" TextColor="#33A7D6" WidthRequest="60" HeightRequest="35" x:Name="btnDelete" Clicked="btnDelete_Clicked"/>
+                            </StackLayout>
+                                                                                    
+                            <Frame x:Name="frameRecord" Padding="0" CornerRadius="3" BackgroundColor="#33A7D6" OutlineColor="White" HasShadow="False" IsVisible="False">
+                                <StackLayout Orientation="Horizontal">
+                                    <controls:FloatingActionButton x:Name="btnRecord" VerticalOptions="Center" Scale="0.5" Image="Microphone.png" ButtonColor="Gray"  HorizontalOptions="Start" Clicked="btnRecord_Clicked" />
+                                    <Label x:Name="lblRecord" TextColor="White" VerticalOptions="Center" FontSize="15" FontAttributes="Bold" Text="버튼을 클릭하면 녹음이 시작됩니다." />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="btnRecord_Clicked" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                            <Frame x:Name="framePlay" Padding="11" CornerRadius="3" BackgroundColor="#33A7D6" OutlineColor="White" HasShadow="False" IsVisible="False">
+                                <StackLayout Orientation="Horizontal">
+                                    <controls:ImageClick x:Name="btnPlay" VerticalOptions="Center" Source="play.png" HorizontalOptions="Start" Click="TapGestureRecognizer_TappedPlay" />
+                                    <Label FontSize="Micro" TextColor="White" Text="00:00" VerticalOptions="Center" x:Name="currentTime" />
+                                    <renderers:ColorProgressBar x:Name="progress" Progress="0" HorizontalOptions="FillAndExpand" VerticalOptions="Center" />
+                                    <Label FontSize="Micro" TextColor="White" Text="00:00" VerticalOptions="Center" x:Name="totalTime" />
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_TappedPlay" />
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Frame>
+                            
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </Grid>
+        </Grid>
+
+        <controls:FloatingActionButton x:Name="btnTextRecord" Margin="0,0,0,0" Scale="0.5" Image="Microphone.png" ButtonColor="Gray" HorizontalOptions="Start" Clicked="btnTextRecord_Clicked"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}" />
+
+    </RelativeLayout>
+
+</ContentPage>

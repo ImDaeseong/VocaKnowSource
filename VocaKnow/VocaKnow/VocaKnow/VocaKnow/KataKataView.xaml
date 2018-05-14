@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls ="clr-namespace:VocaKnow.controls"
+             xmlns:renderers="clr-namespace:VocaKnow.Renderers"
+             xmlns:views ="clr-namespace:VocaKnow"
+             x:Class="VocaKnow.KataKataView">
+    
+    <RelativeLayout x:Name="relLayout">
+
+        <Grid Padding="5, 0, 5, 0"
+              RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+			  RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+          
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <StackLayout Padding="0">
+                    <renderers:BorderedEntry Margin="5,5,5,5" HeightRequest="50" WidthRequest ="100"
+                                             x:Name="eSearch" HasBorder="True" 
+                                             BorderColor="#33A7D6" BorderHeight="1" BorderColorActive="Orange"
+                                             BackgroundColor="Transparent" FontSize="18" TextColor="Black"
+                                             Placeholder="단어 검색" 
+                                             TextChanged="eSearch_TextChanged"/>
+                </StackLayout>
+            </Grid>
+             
+            <Grid Grid.Row="1">
+                <ScrollView>
+                    <StackLayout x:Name="stackList" Margin="5,0,5,0" />
+                </ScrollView>
+            </Grid>
+        </Grid>
+
+        <controls:FloatingActionButton x:Name="btnchange" Clicked="FloatingActionButton_Clicked" Image="change.png" ButtonColor="Gray" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-75}" />
+        
+        <controls:FloatingActionButton x:Name="btnKataAdd" Clicked="btnKataAdd_Clicked" IsVisible="False" Image="addkata.png" ButtonColor="#FFC10E" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-135}" />
+      
+        <controls:FloatingActionButton x:Name="btnKataEdit" Clicked="btnKataEdit_Clicked" IsVisible="False" IsEnabled="False" Image="edit.png" ButtonColor="Gray" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-75}"
+				RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-195}" />
+   
+    </RelativeLayout>
+    
+</ContentView>
