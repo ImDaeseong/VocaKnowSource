@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="divideline">#ffff8800</color>
+
+    <color name="selected_tab">#ffff8800</color>
+    <color name="unselected_tab">#000000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="orange_dark">#ffff8800</color>
+
+    <!-- skin !-->
+    <color name="skin_divideline1">#33A7D6</color>
+    <color name="skin1">#33A7D6</color>
+    <color name="skin_statusbar1">#0299CC</color>
+
+    <color name="skin_divideline2">#493335</color>
+    <color name="skin2">#493335</color>
+    <color name="skin_statusbar2">#3D2B2B</color>
+
+    <color name="skin_divideline3">#FF80AB</color>
+    <color name="skin3">#FF80AB</color>
+    <color name="skin_statusbar3">#EA7CAA</color>
+
+    <color name="skin_divideline4">#4CAF50</color>
+    <color name="skin4">#4CAF50</color>
+    <color name="skin_statusbar4">#42AA49</color>
+
+    <color name="skin_divideline5">#3F51B5</color>
+    <color name="skin5">#3F51B5</color>
+    <color name="skin_statusbar5">#3551AF</color>
+
+    <color name="skin_divideline6">#B71C1C</color>
+    <color name="skin6">#B71C1C</color>
+    <color name="skin_statusbar6">#A31416</color>
+
+    <color name="skin_divideline7">#37474F</color>
+    <color name="skin7">#37474F</color>
+    <color name="skin_statusbar7">#334249</color>
+
+
+</resources>
