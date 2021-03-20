@@ -84,6 +84,9 @@ class Fragment2 : Fragment() {
 
             val bundle = arguments
             sMenu = bundle!!.getString("MenuItem", "")
+
+            Log.e(tag, "sMenu:$sMenu");
+
         } catch (ex: Exception) {
             ex.message.toString()
         }

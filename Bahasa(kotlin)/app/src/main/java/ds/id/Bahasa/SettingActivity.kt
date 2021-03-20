@@ -364,8 +364,8 @@ class SettingActivity : AppCompatActivity() {
             0 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin1))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin1), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin1), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin1), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable
@@ -374,8 +374,8 @@ class SettingActivity : AppCompatActivity() {
             1 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin2))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin2), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin2), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin2), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable
@@ -384,8 +384,8 @@ class SettingActivity : AppCompatActivity() {
             2 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin3))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin3), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin3), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin3), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable
@@ -394,8 +394,8 @@ class SettingActivity : AppCompatActivity() {
             3 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin4))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin4), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin4), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin4), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable
@@ -404,8 +404,8 @@ class SettingActivity : AppCompatActivity() {
             4 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin5))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin5), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin5), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin5), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable
@@ -414,8 +414,8 @@ class SettingActivity : AppCompatActivity() {
             5 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin6))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin6), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin6), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin6), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable
@@ -424,8 +424,8 @@ class SettingActivity : AppCompatActivity() {
             6 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin7))
                 ivInfo!!.setColorFilter(ContextCompat.getColor(this, R.color.skin7), PorterDuff.Mode.SRC_ATOP)
-                val drawable = resources.getDrawable(R.drawable.switch_thumb_selector)
-                drawable.setColorFilter(ContextCompat.getColor(this, R.color.skin7), PorterDuff.Mode.SRC_ATOP)
+                val drawable = ContextCompat.getDrawable(this, R.drawable.switch_thumb_selector)
+                drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.skin7), PorterDuff.Mode.SRC_ATOP)
                 sw1!!.thumbDrawable = drawable
                 sw2!!.thumbDrawable = drawable
                 sw3!!.thumbDrawable = drawable

@@ -211,25 +211,25 @@ class MainActivity : AppCompatActivity() {
 
             when (nSkinStyle) {
                 0 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar1)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar1)
                 }
                 1 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar2)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar2)
                 }
                 2 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar3)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar3)
                 }
                 3 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar4)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar4)
                 }
                 4 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar5)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar5)
                 }
                 5 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar6)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar6)
                 }
                 6 -> {
-                    window.statusBarColor = resources.getColor(R.color.skin_statusbar7)
+                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar7)
                 }
             }
         }
@@ -329,6 +329,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun SelectTab(nIndex: Int, SelectMenuItem: String?) {
+
+        Log.e(tag, "nIndex:$nIndex")
+        Log.e(tag, "SelectMenuItem:$SelectMenuItem")
+        return
 
         try {
 

@@ -4,11 +4,14 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import ds.id.Bahasa.MainActivity
 
 object AnimatorUtil {
+
+    private val tag = AnimatorUtil::class.java.name
 
     //작아졌다 원래대로
     fun AnimatoScaleXY(view: View?) {
@@ -52,8 +55,13 @@ object AnimatorUtil {
 
             override fun onAnimationEnd(animation: Animator) {
 
-                //1번째 탭으로 이동
-                //MainActivity.getMainActivity().SelectTab(1, sText)
+                try {
+
+                    //1번째 탭으로 이동
+                    MainActivity().getMainActivity()!!.SelectTab(1, sText)
+                }catch (ex: java.lang.Exception) {
+                    Log.d(tag, ex.message.toString())
+                }
             }
         })
         objectAnimator.start()
