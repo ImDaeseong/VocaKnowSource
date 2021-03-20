@@ -129,8 +129,6 @@ public class EditKalimatActivity extends AppCompatActivity {
                 }
 
                 //업데이트
-                kataManager.UpdateKalimat(KataIndo, lembutlidah, "Terimakasih telah bekerja dengan baik.");
-
                 kataManager.UpdateKalimat(KataIndo, lembutlidah, sSaveKataIndo);
 
                 Intent intent = new Intent();
