@@ -7,6 +7,9 @@ import android.animation.ObjectAnimator
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.dynamicanimation.animation.DynamicAnimation
+import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import ds.id.Bahasa.MainActivity
 
 object AnimatorUtil {
@@ -25,22 +28,54 @@ object AnimatorUtil {
 
     //왼쪽으로 swipe
     fun AnimatoSwipeLeft(view: View) {
-        var mover = ObjectAnimator.ofFloat(view, "translationX", view.width.toFloat(), 0f)
-        mover.duration = 0
-        mover.start()
-        mover = ObjectAnimator.ofFloat(view, "translationX", -view.width.toFloat(), 0f)
-        mover.duration = 500
-        mover.start()
-    }
-
-    //오른쪽으로 swipe
-    fun AnimatoSwipeRight(view: View) {
         var mover = ObjectAnimator.ofFloat(view, "translationX", -view.width.toFloat(), 0f)
         mover.duration = 0
         mover.start()
         mover = ObjectAnimator.ofFloat(view, "translationX", view.width.toFloat(), 0f)
         mover.duration = 500
+        mover.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                //view.setClickable(true)
+            }
+        })
         mover.start()
+
+        //스프링 효과
+        if (view != null) {
+            val springForce = SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW)
+            val springAnimation = SpringAnimation(view, DynamicAnimation.TRANSLATION_X).setSpring(springForce).setStartValue(view.width.toFloat())
+            springAnimation.addEndListener { animation, canceled, value, velocity ->
+                //view.setClickable(true)
+            }
+            springAnimation.start()
+        }
+    }
+
+    //오른쪽으로 swipe
+    fun AnimatoSwipeRight(view: View) {
+        var mover = ObjectAnimator.ofFloat(view, "translationX", view.width.toFloat(), 0f)
+        mover.duration = 0
+        mover.start()
+        mover = ObjectAnimator.ofFloat(view, "translationX", -view.width.toFloat(), 0f)
+        mover.duration = 500
+        mover.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                super.onAnimationEnd(animation)
+                //view.setClickable(true)
+            }
+        })
+        mover.start()
+
+        //스프링 효과
+        if (view != null) {
+            val springForce = SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW)
+            val springAnimation = SpringAnimation(view, DynamicAnimation.TRANSLATION_X).setSpring(springForce).setStartValue(-view.width.toFloat())
+            springAnimation.addEndListener { animation, canceled, value, velocity ->
+                //view.setClickable(true)
+            }
+            springAnimation.start()
+        }
     }
 
     //360 도 회전후 원래대로
@@ -59,7 +94,7 @@ object AnimatorUtil {
 
                     //1번째 탭으로 이동
                     MainActivity().getMainActivity()!!.SelectTab(1, sText)
-                }catch (ex: java.lang.Exception) {
+                } catch (ex: java.lang.Exception) {
                     Log.d(tag, ex.message.toString())
                 }
             }

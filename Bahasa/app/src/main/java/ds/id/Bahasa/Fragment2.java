@@ -87,7 +87,10 @@ public class Fragment2 extends Fragment {
         try {
 
             Bundle bundle = getArguments();
+            sMenu = "";
             sMenu = bundle.getString("MenuItem", "");
+            bundle.clear();
+
         }catch (Exception ex){
             ex.getMessage().toString();
         }
@@ -406,7 +409,7 @@ public class Fragment2 extends Fragment {
             //DB
             if (nTotalPageCount == 0) return;
 
-            AnimatorUtil.AnimatoSwipeRight(Kataview);
+            AnimatorUtil.AnimatoSwipeLeft(Kataview);
 
             CurrentPlayIndex--;
             if (CurrentPlayIndex < 0)
@@ -436,7 +439,7 @@ public class Fragment2 extends Fragment {
             //DB
             if (nTotalPageCount == 0) return;
 
-            AnimatorUtil.AnimatoSwipeLeft(Kataview);
+            AnimatorUtil.AnimatoSwipeRight(Kataview);
 
             CurrentPlayIndex++;
             if (CurrentPlayIndex > (nTotalPageCount - 1))

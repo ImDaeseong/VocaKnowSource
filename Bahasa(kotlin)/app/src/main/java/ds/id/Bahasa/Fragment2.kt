@@ -84,6 +84,7 @@ class Fragment2 : Fragment() {
 
             val bundle = arguments
             sMenu = bundle!!.getString("MenuItem", "")
+            bundle.clear()
 
             Log.e(tag, "sMenu:$sMenu");
 
@@ -378,7 +379,7 @@ class Fragment2 : Fragment() {
             //DB
             if (nTotalPageCount == 0) return
 
-            AnimatoSwipeRight(Kataview!!)
+            AnimatoSwipeLeft(Kataview!!)
 
             CurrentPlayIndex--
             if (CurrentPlayIndex < 0) CurrentPlayIndex = nTotalPageCount - 1
@@ -404,7 +405,7 @@ class Fragment2 : Fragment() {
             //DB
             if (nTotalPageCount == 0) return
 
-            AnimatoSwipeLeft(Kataview!!)
+            AnimatoSwipeRight(Kataview!!)
 
             CurrentPlayIndex++
             if (CurrentPlayIndex > nTotalPageCount - 1) CurrentPlayIndex = 0
@@ -654,6 +655,9 @@ class Fragment2 : Fragment() {
     }
 
     fun setChangeSetting() {
+
+        Log.e(tag, "setChangeSetting()");
+
         ChangeSkinStyle()
 
         //사운드 사용 여부

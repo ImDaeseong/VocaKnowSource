@@ -383,6 +383,8 @@ class Fragment4 : Fragment() {
 
     fun setChangeSetting() {
 
+        Log.e(tag, "setChangeSetting()");
+
         ChangeSkinStyle()
 
         if (fab2!!.visibility == View.VISIBLE) {

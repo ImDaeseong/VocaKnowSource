@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -327,7 +328,7 @@ class Fragment3 : Fragment() {
             //DB
             if (nTotalPageCount == 0) return
 
-            AnimatoSwipeRight(Kataview!!)
+            AnimatoSwipeLeft(Kataview!!)
 
             CurrentPlayIndex--
             if (CurrentPlayIndex < 0) CurrentPlayIndex = nTotalPageCount - 1
@@ -355,7 +356,7 @@ class Fragment3 : Fragment() {
             //DB
             if (nTotalPageCount == 0) return
 
-            AnimatoSwipeLeft(Kataview!!)
+            AnimatoSwipeRight(Kataview!!)
 
             CurrentPlayIndex++
             if (CurrentPlayIndex > nTotalPageCount - 1) CurrentPlayIndex = 0
@@ -616,6 +617,8 @@ class Fragment3 : Fragment() {
     }
 
     fun setChangeSetting() {
+
+        Log.e(tag, "setChangeSetting()");
 
         ChangeSkinStyle()
 

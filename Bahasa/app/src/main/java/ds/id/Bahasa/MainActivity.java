@@ -316,10 +316,12 @@ public class MainActivity extends AppCompatActivity {
                 fragmentTransaction.commit();
                 break;
             case 1:
+                fragmentTransaction.setCustomAnimations(R.anim.slide_bounce1, R.anim.slide_bounce2);
                 fragmentTransaction.replace(R.id.frameLayout, fragment2);
                 fragmentTransaction.commit();
                 break;
             case 2:
+                fragmentTransaction.setCustomAnimations(R.anim.slide_bounce1, R.anim.slide_bounce2);
                 fragmentTransaction.replace(R.id.frameLayout, fragment3);
                 fragmentTransaction.commit();
                 break;

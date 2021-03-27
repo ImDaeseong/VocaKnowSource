@@ -240,25 +240,60 @@ class MainActivity : AppCompatActivity() {
         nSkinStyle = KataSetting.getInstance().skinStyle
         when (nSkinStyle) {
             0 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline1))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline1
+                    )
+                )
             }
             1 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline2))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline2
+                    )
+                )
             }
             2 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline3))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline3
+                    )
+                )
             }
             3 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline4))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline4
+                    )
+                )
             }
             4 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline5))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline5
+                    )
+                )
             }
             5 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline6))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline6
+                    )
+                )
             }
             6 -> {
-                divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline7))
+                divider_line!!.setBackgroundColor(
+                    ContextCompat.getColor(
+                        this,
+                        R.color.skin_divideline7
+                    )
+                )
             }
         }
     }
@@ -314,10 +349,12 @@ class MainActivity : AppCompatActivity() {
                 fragmentTransaction!!.commit()
             }
             1 -> {
+                fragmentTransaction!!.setCustomAnimations(R.anim.slide_bounce1, R.anim.slide_bounce2)
                 fragmentTransaction!!.replace(R.id.frameLayout, fragment2!!)
                 fragmentTransaction!!.commit()
             }
             2 -> {
+                fragmentTransaction!!.setCustomAnimations(R.anim.slide_bounce1, R.anim.slide_bounce2)
                 fragmentTransaction!!.replace(R.id.frameLayout, fragment3!!)
                 fragmentTransaction!!.commit()
             }
@@ -387,6 +424,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setChangeSetting() {
+
+        Log.e(tag, "setChangeSetting()")
 
         ChangeSkinStyle()
 

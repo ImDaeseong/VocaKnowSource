@@ -349,7 +349,7 @@ public class Fragment3 extends Fragment {
             //DB
             if (nTotalPageCount == 0) return;
 
-            AnimatorUtil.AnimatoSwipeRight(Kataview);
+            AnimatorUtil.AnimatoSwipeLeft(Kataview);
 
             CurrentPlayIndex--;
             if (CurrentPlayIndex < 0)
@@ -379,7 +379,7 @@ public class Fragment3 extends Fragment {
             //DB
             if (nTotalPageCount == 0) return;
 
-            AnimatorUtil.AnimatoSwipeLeft(Kataview);
+            AnimatorUtil.AnimatoSwipeRight(Kataview);
 
             CurrentPlayIndex++;
             if (CurrentPlayIndex > (nTotalPageCount - 1))
