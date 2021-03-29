@@ -192,7 +192,7 @@ class Fragment1 : Fragment() {
 
     fun setChangeSetting() {
 
-        Log.e(tag, "setChangeSetting()");
+        //Log.e(tag, "setChangeSetting()");
 
         ChangeSkinStyle()
     }

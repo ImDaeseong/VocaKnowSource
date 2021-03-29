@@ -152,7 +152,9 @@ class SettingActivity : AppCompatActivity() {
                     if (!TextUtils.isEmpty(s.toString())) {
                         val nKataTime = s.toString().toInt()
                         KataSetting.getInstance().kataTime = nKataTime
-                        MainActivity().getMainActivity()!!.setChangeSetting()
+
+                        val mainActivity = MainActivity()
+                        mainActivity.setChangeSetting()
                     }
                 } catch (e: Exception) {
                 }
@@ -169,7 +171,9 @@ class SettingActivity : AppCompatActivity() {
                     if (!TextUtils.isEmpty(s.toString())) {
                         val nKataTime = s.toString().toInt()
                         KataSetting.getInstance().wordKataTime = nKataTime
-                        MainActivity().getMainActivity()!!.setChangeSetting()
+
+                        val mainActivity = MainActivity()
+                        mainActivity.setChangeSetting()
                     }
                 } catch (e: Exception) {
                 }
@@ -181,7 +185,9 @@ class SettingActivity : AppCompatActivity() {
             try {
 
                 KataSetting.getInstance().kalimatSound = isChecked
-                MainActivity().getMainActivity()!!.setChangeSetting()
+
+                val mainActivity = MainActivity()
+                mainActivity.setChangeSetting()
             } catch (e: Exception) {
             }
         }
@@ -191,7 +197,9 @@ class SettingActivity : AppCompatActivity() {
             try {
 
                 KataSetting.getInstance().kataSound = isChecked
-                MainActivity().getMainActivity()!!.setChangeSetting()
+
+                val mainActivity = MainActivity()
+                mainActivity.setChangeSetting()
             } catch (e: Exception) {
             }
         }
@@ -201,8 +209,10 @@ class SettingActivity : AppCompatActivity() {
             try {
 
                 KataSetting.getInstance().screenLock = isChecked
-                MainActivity().getMainActivity()!!.getScreenLock()
-                MainActivity().getMainActivity()!!.setChangeSetting()
+
+                val mainActivity = MainActivity()
+                mainActivity.getScreenLock()
+                mainActivity.setChangeSetting()
             } catch (e: Exception) {
             }
         }
@@ -216,7 +226,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 0
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -230,7 +242,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 1
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -244,7 +258,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 2
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -258,7 +274,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 3
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -272,7 +290,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 4
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -286,7 +306,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 5
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -300,7 +322,9 @@ class SettingActivity : AppCompatActivity() {
 
                     KataSetting.getInstance().skinStyle = 6
                     InitSkinStyle()
-                    MainActivity().getMainActivity()!!.setChangeSetting()
+
+                    val mainActivity = MainActivity()
+                    mainActivity.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }

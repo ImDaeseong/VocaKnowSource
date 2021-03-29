@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private val tag = MainActivity::class.java.simpleName
 
+    /*
     private var mainActivity: MainActivity? = null
     fun getMainActivity(): MainActivity? {
         return mainActivity
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
     private fun setMainActivity(mainActivity: MainActivity) {
         this.mainActivity = mainActivity
     }
+    */
 
     private var nSkinStyle = 0
     private var nBookResource = 0
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setMainActivity(this)
+        //setMainActivity(this)
 
         InitTitleBar()
 
@@ -367,9 +369,8 @@ class MainActivity : AppCompatActivity() {
 
     fun SelectTab(nIndex: Int, SelectMenuItem: String?) {
 
-        Log.e(tag, "nIndex:$nIndex")
-        Log.e(tag, "SelectMenuItem:$SelectMenuItem")
-        return
+        //Log.e(tag, "nIndex:$nIndex")
+        //Log.e(tag, "SelectMenuItem:$SelectMenuItem")
 
         try {
 
@@ -425,23 +426,35 @@ class MainActivity : AppCompatActivity() {
 
     fun setChangeSetting() {
 
-        Log.e(tag, "setChangeSetting()")
+        //Log.e(tag, "setChangeSetting()")
 
         ChangeSkinStyle()
 
         if (fragment1!!.activity != null) {
+
+            Log.e(tag, "setChangeSetting()-fragment1")
+
             fragment1!!.setChangeSetting()
         }
 
         if (fragment2!!.activity != null) {
+
+            Log.e(tag, "setChangeSetting()-fragment2")
+
             fragment2!!.setChangeSetting()
         }
 
         if (fragment3!!.activity != null) {
+
+            Log.e(tag, "setChangeSetting()-fragment3")
+
             fragment3!!.setChangeSetting()
         }
 
         if (fragment4!!.activity != null) {
+
+            Log.e(tag, "setChangeSetting()-fragment4")
+
             fragment4!!.setChangeSetting()
         }
     }
