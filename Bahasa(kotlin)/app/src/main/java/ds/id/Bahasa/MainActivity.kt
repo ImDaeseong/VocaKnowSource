@@ -205,132 +205,153 @@ class MainActivity : AppCompatActivity() {
 
     private fun InitTitleBar() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val window: Window = window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
 
-            when (nSkinStyle) {
-                0 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar1)
-                }
-                1 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar2)
-                }
-                2 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar3)
-                }
-                3 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar4)
-                }
-                4 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar5)
-                }
-                5 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar6)
-                }
-                6 -> {
-                    window.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar7)
+        try{
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+
+                when (nSkinStyle) {
+                    0 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar1)
+                    }
+                    1 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar2)
+                    }
+                    2 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar3)
+                    }
+                    3 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar4)
+                    }
+                    4 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar5)
+                    }
+                    5 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar6)
+                    }
+                    6 -> {
+                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar7)
+                    }
                 }
             }
+
+        }catch (e: Exception){
+            Log.e(tag, "InitTitleBar error:" + e.message.toString())
         }
+
     }
 
     private fun Initdivider() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
-        when (nSkinStyle) {
-            0 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline1
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
+
+        try{
+
+            when (nSkinStyle) {
+                0 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline1
+                        )
                     )
-                )
-            }
-            1 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline2
+                }
+                1 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline2
+                        )
                     )
-                )
-            }
-            2 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline3
+                }
+                2 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline3
+                        )
                     )
-                )
-            }
-            3 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline4
+                }
+                3 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline4
+                        )
                     )
-                )
-            }
-            4 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline5
+                }
+                4 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline5
+                        )
                     )
-                )
-            }
-            5 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline6
+                }
+                5 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline6
+                        )
                     )
-                )
-            }
-            6 -> {
-                divider_line!!.setBackgroundColor(
-                    ContextCompat.getColor(
-                        this,
-                        R.color.skin_divideline7
+                }
+                6 -> {
+                    divider_line!!.setBackgroundColor(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.skin_divideline7
+                        )
                     )
-                )
+                }
             }
+
+        }catch (e: Exception){
+            Log.e(tag, "Initdivider error:" + e.message.toString())
         }
     }
 
     private fun setTabItemImage() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
-        when (nSkinStyle) {
-            0 -> {
-                nBookResource = R.drawable.book1
-            }
-            1 -> {
-                nBookResource = R.drawable.book2
-            }
-            2 -> {
-                nBookResource = R.drawable.book3
-            }
-            3 -> {
-                nBookResource = R.drawable.book4
-            }
-            4 -> {
-                nBookResource = R.drawable.book5
-            }
-            5 -> {
-                nBookResource = R.drawable.book6
-            }
-            6 -> {
-                nBookResource = R.drawable.book7
-            }
-        }
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
 
-        tabLayout!!.getTabAt(0)!!.setIcon(nBookResource)
-        tabLayout!!.getTabAt(1)!!.setIcon(nBookResource)
-        tabLayout!!.getTabAt(2)!!.setIcon(nBookResource)
-        tabLayout!!.getTabAt(3)!!.setIcon(nBookResource)
+        try{
+
+            when (nSkinStyle) {
+                0 -> {
+                    nBookResource = R.drawable.book1
+                }
+                1 -> {
+                    nBookResource = R.drawable.book2
+                }
+                2 -> {
+                    nBookResource = R.drawable.book3
+                }
+                3 -> {
+                    nBookResource = R.drawable.book4
+                }
+                4 -> {
+                    nBookResource = R.drawable.book5
+                }
+                5 -> {
+                    nBookResource = R.drawable.book6
+                }
+                6 -> {
+                    nBookResource = R.drawable.book7
+                }
+            }
+
+            tabLayout!!.getTabAt(0)!!.setIcon(nBookResource)
+            tabLayout!!.getTabAt(1)!!.setIcon(nBookResource)
+            tabLayout!!.getTabAt(2)!!.setIcon(nBookResource)
+            tabLayout!!.getTabAt(3)!!.setIcon(nBookResource)
+
+        }catch (e: Exception){
+            Log.e(tag, "setTabItemImage error:" + e.message.toString())
+        }
     }
 
     private fun initFragment() {
@@ -351,12 +372,18 @@ class MainActivity : AppCompatActivity() {
                 fragmentTransaction!!.commit()
             }
             1 -> {
-                fragmentTransaction!!.setCustomAnimations(R.anim.slide_bounce1, R.anim.slide_bounce2)
+                fragmentTransaction!!.setCustomAnimations(
+                    R.anim.slide_bounce1,
+                    R.anim.slide_bounce2
+                )
                 fragmentTransaction!!.replace(R.id.frameLayout, fragment2!!)
                 fragmentTransaction!!.commit()
             }
             2 -> {
-                fragmentTransaction!!.setCustomAnimations(R.anim.slide_bounce1, R.anim.slide_bounce2)
+                fragmentTransaction!!.setCustomAnimations(
+                    R.anim.slide_bounce1,
+                    R.anim.slide_bounce2
+                )
                 fragmentTransaction!!.replace(R.id.frameLayout, fragment3!!)
                 fragmentTransaction!!.commit()
             }
@@ -430,28 +457,28 @@ class MainActivity : AppCompatActivity() {
 
         ChangeSkinStyle()
 
-        if (fragment1!!.activity != null) {
+        if (fragment1 != null) {//if (fragment1!!.activity != null) {
 
             Log.e(tag, "setChangeSetting()-fragment1")
 
             fragment1!!.setChangeSetting()
         }
 
-        if (fragment2!!.activity != null) {
+        if (fragment2 != null) {//if (fragment2!!.activity != null) {
 
             Log.e(tag, "setChangeSetting()-fragment2")
 
             fragment2!!.setChangeSetting()
         }
 
-        if (fragment3!!.activity != null) {
+        if (fragment3 != null) {//if (fragment3!!.activity != null) {
 
             Log.e(tag, "setChangeSetting()-fragment3")
 
             fragment3!!.setChangeSetting()
         }
 
-        if (fragment4!!.activity != null) {
+        if (fragment4 != null) {//if (fragment4!!.activity != null) {
 
             Log.e(tag, "setChangeSetting()-fragment4")
 
@@ -462,7 +489,7 @@ class MainActivity : AppCompatActivity() {
     fun getScreenLock() {
 
         try {
-            val bLock: Boolean? = KataSetting.getInstance().screenLock
+            val bLock: Boolean? = BahasaApplication.getInstance().getScreenLock()
             if (bLock != null) {
                 ScreenLockutil.Lock_Flag(window, bLock)
             }

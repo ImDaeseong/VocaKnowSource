@@ -94,7 +94,7 @@ class Fragment1 : Fragment() {
 
     private fun InitSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
                 nSkinStyleResource = R.drawable.menu1_style

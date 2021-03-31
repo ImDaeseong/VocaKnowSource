@@ -237,10 +237,10 @@ class Fragment3 : Fragment() {
         textToSpeechUtil = TextToSpeechUtil(mContext)
 
         //사운드 사용 여부
-        bUseSound = KataSetting.getInstance().kalimatSound!!
+        bUseSound = BahasaApplication.getInstance().getKalimatSound()
 
-        //가나다라... 자동 반복 시간
-        nRepeatTime = KataSetting.getInstance().kataTime
+        //가나다라... 자동 반복 시간(단어장)
+        nRepeatTime = BahasaApplication.getInstance().getWordKataTime()
     }
 
     private fun InitData() {
@@ -261,7 +261,7 @@ class Fragment3 : Fragment() {
 
     private fun InitSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
                 nSwipeResource = R.drawable.skin1_style
@@ -503,7 +503,7 @@ class Fragment3 : Fragment() {
 
     private fun ChangeSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
                 nSwipeResource = R.drawable.skin1_style
@@ -623,9 +623,9 @@ class Fragment3 : Fragment() {
         ChangeSkinStyle()
 
         //사운드 사용 여부
-        bUseSound = KataSetting.getInstance().kalimatSound!!
+        bUseSound = BahasaApplication.getInstance().getKalimatSound()
 
         //가나다라... 자동 반복 시간
-        nRepeatTime = KataSetting.getInstance().kataTime
+        nRepeatTime = BahasaApplication.getInstance().getKataTime()
     }
 }

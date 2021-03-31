@@ -364,7 +364,7 @@ class EditKataActivity : AppCompatActivity() {
 
     private fun InitSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin1))

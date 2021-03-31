@@ -164,7 +164,7 @@ class EditKalimatActivity : AppCompatActivity() {
 
     private fun InitSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
 

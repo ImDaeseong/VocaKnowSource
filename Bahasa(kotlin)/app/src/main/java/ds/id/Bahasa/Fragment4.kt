@@ -242,7 +242,7 @@ class Fragment4 : Fragment() {
 
     private fun InitSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
                 nSkinStyleResource = R.color.skin1
@@ -312,7 +312,7 @@ class Fragment4 : Fragment() {
 
     private fun ChangeSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
 

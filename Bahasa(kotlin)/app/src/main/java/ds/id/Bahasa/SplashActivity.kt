@@ -7,6 +7,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -94,32 +95,38 @@ class SplashActivity : AppCompatActivity() {
                 //스킨 타입
                 val nSkinStyle: Int = KataSetting.getInstance().skinStyle
                 BahasaApplication.getInstance().setSkinStyle(nSkinStyle)
+                //Log.e(tag, "InitData nSkinStyle:$nSkinStyle")
 
                 //문장 자동 반복 시간
                 val nKataTime: Int = KataSetting.getInstance().kataTime
                 BahasaApplication.getInstance().setKataTime(nKataTime)
+                //Log.e(tag, "InitData nKataTime:$nKataTime")
 
                 //단어장 자동 반복 시간
                 val nWordKataTime: Int = KataSetting.getInstance().wordKataTime
                 BahasaApplication.getInstance().setWordKataTime(nWordKataTime)
+                //Log.e(tag, "InitData nWordKataTime:$nWordKataTime")
 
                 //문장 음성 지원
                 val bKalimatSoundToggle: Boolean? = KataSetting.getInstance().kalimatSound
                 if (bKalimatSoundToggle != null) {
                     BahasaApplication.getInstance().setKalimatSound(bKalimatSoundToggle)
                 }
+                //Log.e(tag, "InitData bKalimatSoundToggle:$bKalimatSoundToggle")
 
                 //단어장 녹음 지원
                 val bSoundToggle: Boolean? = KataSetting.getInstance().kataSound
                 if (bSoundToggle != null) {
                     BahasaApplication.getInstance().setKataSound(bSoundToggle)
                 }
+                //Log.e(tag, "InitData bSoundToggle:$bSoundToggle")
 
                 //스크린 화면 항상 켜기 지원
                 val bScreenLockToggle: Boolean? = KataSetting.getInstance().screenLock
                 if (bScreenLockToggle != null) {
                     BahasaApplication.getInstance().setScreenLock(bScreenLockToggle)
                 }
+                //Log.e(tag, "InitData bScreenLockToggle:$bScreenLockToggle")
 
                 val msg = handler!!.obtainMessage()
                 msg.what = 0

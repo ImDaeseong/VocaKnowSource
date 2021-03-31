@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -152,6 +153,7 @@ class SettingActivity : AppCompatActivity() {
                     if (!TextUtils.isEmpty(s.toString())) {
                         val nKataTime = s.toString().toInt()
                         KataSetting.getInstance().kataTime = nKataTime
+                        BahasaApplication.getInstance().setKataTime(nKataTime)
 
                         val mainActivity = MainActivity()
                         mainActivity.setChangeSetting()
@@ -169,8 +171,9 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     if (!TextUtils.isEmpty(s.toString())) {
-                        val nKataTime = s.toString().toInt()
-                        KataSetting.getInstance().wordKataTime = nKataTime
+                        val nWordKataTime = s.toString().toInt()
+                        KataSetting.getInstance().wordKataTime = nWordKataTime
+                        BahasaApplication.getInstance().setWordKataTime(nWordKataTime)
 
                         val mainActivity = MainActivity()
                         mainActivity.setChangeSetting()
@@ -185,6 +188,7 @@ class SettingActivity : AppCompatActivity() {
             try {
 
                 KataSetting.getInstance().kalimatSound = isChecked
+                BahasaApplication.getInstance().setKalimatSound(isChecked)
 
                 val mainActivity = MainActivity()
                 mainActivity.setChangeSetting()
@@ -197,6 +201,7 @@ class SettingActivity : AppCompatActivity() {
             try {
 
                 KataSetting.getInstance().kataSound = isChecked
+                BahasaApplication.getInstance().setKataSound(isChecked)
 
                 val mainActivity = MainActivity()
                 mainActivity.setChangeSetting()
@@ -209,6 +214,7 @@ class SettingActivity : AppCompatActivity() {
             try {
 
                 KataSetting.getInstance().screenLock = isChecked
+                BahasaApplication.getInstance().setScreenLock(isChecked)
 
                 val mainActivity = MainActivity()
                 mainActivity.getScreenLock()
@@ -225,6 +231,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 0
+                    BahasaApplication.getInstance().setSkinStyle(0)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -241,6 +248,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 1
+                    BahasaApplication.getInstance().setSkinStyle(1)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -257,6 +265,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 2
+                    BahasaApplication.getInstance().setSkinStyle(2)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -273,6 +282,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 3
+                    BahasaApplication.getInstance().setSkinStyle(3)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -289,6 +299,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 4
+                    BahasaApplication.getInstance().setSkinStyle(4)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -305,6 +316,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 5
+                    BahasaApplication.getInstance().setSkinStyle(5)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -321,6 +333,7 @@ class SettingActivity : AppCompatActivity() {
                 try {
 
                     KataSetting.getInstance().skinStyle = 6
+                    BahasaApplication.getInstance().setSkinStyle(6)
                     InitSkinStyle()
 
                     val mainActivity = MainActivity()
@@ -385,7 +398,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun InitSkinStyle() {
 
-        nSkinStyle = KataSetting.getInstance().skinStyle
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
         when (nSkinStyle) {
             0 -> {
                 include!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin1))
