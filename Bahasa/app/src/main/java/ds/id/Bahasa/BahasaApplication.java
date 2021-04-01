@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import ds.id.Bahasa.Common.KataSetting;
 import ds.id.Bahasa.Controls.SharedPreferencesUtil;
 
 public class BahasaApplication extends Application {
@@ -85,7 +84,7 @@ public class BahasaApplication extends Application {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.toast_layout, null);
 
-        int nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        int nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
             view.setBackgroundResource(R.drawable.menu1_style);
         } else if(nSkinStyle == 1) {

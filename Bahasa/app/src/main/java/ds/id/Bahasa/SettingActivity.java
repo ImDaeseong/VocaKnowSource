@@ -157,6 +157,7 @@ public class SettingActivity extends AppCompatActivity {
 
                         int nKataTime = Integer.parseInt(s.toString());
                         KataSetting.getInstance().setKataTime(nKataTime);
+                        BahasaApplication.getInstance().setKataTime(nKataTime);
                         MainActivity.getMainActivity().setChangeSetting();
                     }
 
@@ -181,8 +182,9 @@ public class SettingActivity extends AppCompatActivity {
 
                     if (!TextUtils.isEmpty(s.toString())) {
 
-                        int nKataTime = Integer.parseInt(s.toString());
-                        KataSetting.getInstance().setWordKataTime(nKataTime);
+                        int nWordKataTime = Integer.parseInt(s.toString());
+                        KataSetting.getInstance().setWordKataTime(nWordKataTime);
+                        BahasaApplication.getInstance().setWordKataTime(nWordKataTime);
                         MainActivity.getMainActivity().setChangeSetting();
                     }
 
@@ -199,6 +201,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setKalimatSound(isChecked);
+                    BahasaApplication.getInstance().setKalimatSound(isChecked);
                     MainActivity.getMainActivity().setChangeSetting();
 
                 }catch (Exception e){
@@ -215,6 +218,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setKataSound(isChecked);
+                    BahasaApplication.getInstance().setKataSound(isChecked);
                     MainActivity.getMainActivity().setChangeSetting();
 
                 }catch (Exception e){
@@ -231,6 +235,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setScreenLock(isChecked);
+                    BahasaApplication.getInstance().setScreenLock(isChecked);
                     MainActivity.getMainActivity().getScreenLock();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -250,6 +255,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(0);
+                    BahasaApplication.getInstance().setSkinStyle(0);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -268,6 +274,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(1);
+                    BahasaApplication.getInstance().setSkinStyle(1);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -286,6 +293,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(2);
+                    BahasaApplication.getInstance().setSkinStyle(2);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -304,6 +312,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(3);
+                    BahasaApplication.getInstance().setSkinStyle(3);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -322,6 +331,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(4);
+                    BahasaApplication.getInstance().setSkinStyle(4);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -340,6 +350,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(5);
+                    BahasaApplication.getInstance().setSkinStyle(5);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -358,6 +369,7 @@ public class SettingActivity extends AppCompatActivity {
                 try {
 
                     KataSetting.getInstance().setSkinStyle(6);
+                    BahasaApplication.getInstance().setSkinStyle(6);
                     InitSkinStyle();
                     MainActivity.getMainActivity().setChangeSetting();
 
@@ -416,7 +428,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private void InitSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
 
             include.setBackgroundColor(ContextCompat.getColor(this, R.color.skin1));

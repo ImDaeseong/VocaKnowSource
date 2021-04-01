@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity getMainActivity(){
         return  mainActivity;
     }
-    private static void setMainActivity(MainActivity mainActivity){
+    public static void setMainActivity(MainActivity mainActivity){
         MainActivity.mainActivity = mainActivity;
     }
 
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-            nSkinStyle = KataSetting.getInstance().getSkinStyle();
+            nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
             if(nSkinStyle == 0) {
                 window.setStatusBarColor(getResources().getColor(R.color.skin_statusbar1));
             } else if(nSkinStyle == 1) {
@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void Initdivider(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
             divider_line.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline1));
         } else if(nSkinStyle == 1) {
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setTabItemImage(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
             nBookResource  = R.drawable.book1;
         } else if(nSkinStyle == 1) {

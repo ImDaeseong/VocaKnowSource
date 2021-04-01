@@ -103,31 +103,36 @@ public class SplashActivity extends AppCompatActivity {
                 try{
 
                     //현재 미사용으로 주석 처리
-                    /*
+
                     //스킨 타입
                     int nSkinStyle = KataSetting.getInstance().getSkinStyle();
                     BahasaApplication.getInstance().setSkinStyle(nSkinStyle);
+                    //Log.e(TAG, "InitData nSkinStyle:" + nSkinStyle);
 
                     //문장 자동 반복 시간
                     int nKataTime = KataSetting.getInstance().getKataTime();
                     BahasaApplication.getInstance().setKataTime(nKataTime);
+                    //Log.e(TAG, "InitData nKataTime:" + nKataTime);
 
                     //단어장 자동 반복 시간
                     int nWordKataTime = KataSetting.getInstance().getWordKataTime();
                     BahasaApplication.getInstance().setWordKataTime(nWordKataTime);
+                    //Log.e(TAG, "InitData nWordKataTime:" + nWordKataTime);
 
                     //문장 음성 지원
                     boolean bKalimatSoundToggle = KataSetting.getInstance().getKalimatSound();
                     BahasaApplication.getInstance().setKalimatSound(bKalimatSoundToggle);
+                    //Log.e(TAG, "InitData bKalimatSoundToggle:" + bKalimatSoundToggle);
 
                     //단어장 녹음 지원
                     boolean bSoundToggle = KataSetting.getInstance().getKataSound();
                     BahasaApplication.getInstance().setKataSound(bSoundToggle);
+                    //Log.e(TAG, "InitData bSoundToggle:" + bSoundToggle);
 
                     //스크린 화면 항상 켜기 지원
                     boolean bScreenLockToggle = KataSetting.getInstance().getScreenLock();
                     BahasaApplication.getInstance().setScreenLock(bScreenLockToggle);
-                    */
+                    //Log.e(TAG, "InitData bScreenLockToggle:" + bScreenLockToggle);
 
                     Message msg = handler.obtainMessage();
                     msg.what = 0;

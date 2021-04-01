@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import java.util.ArrayList;
-import ds.id.Bahasa.Common.KataSetting;
 import ds.id.Bahasa.Controls.OnSingleClickListener;
 import ds.id.Bahasa.Controls.RoundImageView;
 import ds.id.Bahasa.Database.KataManager;
@@ -248,7 +247,7 @@ public class Fragment4 extends Fragment {
 
     private void InitSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
 
             nSkinStyleResource = R.color.skin1;
@@ -317,7 +316,7 @@ public class Fragment4 extends Fragment {
 
     private void ChangeSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
 
             nSkinStyleResource = R.color.skin1;

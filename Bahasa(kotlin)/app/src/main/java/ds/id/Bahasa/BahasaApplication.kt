@@ -48,7 +48,7 @@ class BahasaApplication : Application() {
 
         val inflater = context.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = inflater.inflate(R.layout.toast_layout, null)
-        when (KataSetting.getInstance().skinStyle) {
+        when (BahasaApplication.getInstance().getSkinStyle()) {
             0 -> {
                 view.setBackgroundResource(R.drawable.menu1_style)
             }

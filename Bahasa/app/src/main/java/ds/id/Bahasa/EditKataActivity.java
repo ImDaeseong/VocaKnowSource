@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.io.IOException;
-import ds.id.Bahasa.Common.KataSetting;
 import ds.id.Bahasa.Controls.AudioPlayer;
 import ds.id.Bahasa.Controls.AudioRecorder;
 import ds.id.Bahasa.Controls.FileUtils;
@@ -389,7 +388,7 @@ public class EditKataActivity extends AppCompatActivity {
 
     private void InitSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
 
             include.setBackgroundColor(ContextCompat.getColor(this, R.color.skin1));

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.GridLayout;
 import android.widget.ScrollView;
-import ds.id.Bahasa.Common.KataSetting;
 import ds.id.Bahasa.Common.gMenuItem;
 import ds.id.Bahasa.Controls.AnimatorUtil;
 import ds.id.Bahasa.Controls.OnSingleClickListener;
@@ -98,7 +97,7 @@ public class Fragment1 extends Fragment {
 
     private void InitSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
             nSkinStyleResource = R.drawable.menu1_style;
         } else if(nSkinStyle == 1) {

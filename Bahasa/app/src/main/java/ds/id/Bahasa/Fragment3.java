@@ -281,7 +281,7 @@ public class Fragment3 extends Fragment {
 
     private void InitSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
 
             nSwipeResource  = R.drawable.skin1_style;
@@ -545,7 +545,7 @@ public class Fragment3 extends Fragment {
 
     private void ChangeSkinStyle(){
 
-        nSkinStyle = KataSetting.getInstance().getSkinStyle();
+        nSkinStyle = BahasaApplication.getInstance().getSkinStyle();
         if(nSkinStyle == 0) {
 
             nSwipeResource  = R.drawable.skin1_style;
@@ -662,9 +662,9 @@ public class Fragment3 extends Fragment {
         ChangeSkinStyle();
 
         //사운드 사용 여부
-        bUseSound = KataSetting.getInstance().getKalimatSound();
+        bUseSound = BahasaApplication.getInstance().getKalimatSound();
 
         //가나다라... 자동 반복 시간
-        nRepeatTime = KataSetting.getInstance().getKataTime();
+        nRepeatTime = BahasaApplication.getInstance().getKataTime();
     }
 }
