@@ -19,7 +19,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Controls.OnSingleClickListener
 import ds.id.Bahasa.Controls.RoundImageView
 import ds.id.Bahasa.Database.KataManager
@@ -130,7 +129,7 @@ class Fragment4 : Fragment() {
         rv1!!.setOnTouchListener { v, event ->
 
             try {
-                (activity as MainActivity?)!!.hideKeyboard()
+                MainActivity.mActivity?.hideKeyboard()
             } catch (e: Exception) {
             }
             false
@@ -142,7 +141,7 @@ class Fragment4 : Fragment() {
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
 
                 try {
-                    (activity as MainActivity?)!!.hideKeyboard()
+                    MainActivity.mActivity?.hideKeyboard()
                 } catch (e: Exception) {
                 }
                 return@OnKeyListener true
@@ -157,7 +156,8 @@ class Fragment4 : Fragment() {
 
             override fun onSingleClick(v: View) {
 
-                (activity as MainActivity?)!!.hideKeyboard()
+                MainActivity.mActivity?.hideKeyboard()
+
                 searchET!!.setText("")
 
                 if (fab2!!.visibility == View.VISIBLE) {
@@ -186,7 +186,7 @@ class Fragment4 : Fragment() {
 
                         override fun onItemClick(v: View?, position: Int) {
 
-                            (activity as MainActivity?)!!.hideKeyboard()
+                            MainActivity.mActivity?.hideKeyboard()
 
                             //선택된 그리드의 데이터
                             val (rIndex, kataKor, kataIndo, kataIndoTambah) = items!![position]
@@ -217,7 +217,8 @@ class Fragment4 : Fragment() {
         fab2!!.setOnClickListener(object : OnSingleClickListener() {
 
             override fun onSingleClick(v: View) {
-                (activity as MainActivity?)!!.hideKeyboard()
+
+                MainActivity.mActivity?.hideKeyboard()
 
                 val intent = Intent(mContext, EditKataActivity::class.java)
                 intent.putExtra("KataIndo", sKataIndo)
@@ -382,8 +383,6 @@ class Fragment4 : Fragment() {
     }
 
     fun setChangeSetting() {
-
-        //Log.e(tag, "setChangeSetting()");
 
         ChangeSkinStyle()
 

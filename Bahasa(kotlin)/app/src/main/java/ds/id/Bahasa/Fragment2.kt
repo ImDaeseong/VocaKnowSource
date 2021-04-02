@@ -15,7 +15,6 @@ import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Controls.*
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoSwipeLeft
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoSwipeRight
@@ -85,9 +84,6 @@ class Fragment2 : Fragment() {
             val bundle = arguments
             sMenu = bundle!!.getString("MenuItem", "")
             bundle.clear()
-
-            Log.e(tag, "sMenu:$sMenu");
-
         } catch (ex: Exception) {
             ex.message.toString()
         }
@@ -119,7 +115,6 @@ class Fragment2 : Fragment() {
     override fun onPause() {
         super.onPause()
 
-        //Log.e(TAG, "onPause");
         try {
             if (bIsAutoPlay) {
                 RunAutoPlay()
@@ -131,8 +126,6 @@ class Fragment2 : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        //Log.e(tag, "onResume")
 
         try {
 
@@ -471,6 +464,7 @@ class Fragment2 : Fragment() {
     }
 
     private fun PlaySuaraSound(sText: String) {
+
         try {
             if (bUseSound) {
                 handler!!.postDelayed({
@@ -655,8 +649,6 @@ class Fragment2 : Fragment() {
     }
 
     fun setChangeSetting() {
-
-        //Log.e(tag, "setChangeSetting()");
 
         ChangeSkinStyle()
 

@@ -7,7 +7,7 @@ import androidx.core.app.ActivityCompat
 
 object PermissionUtil {
 
-    private const val RESULT_CODE = 1
+    const val RESULT_CODE = 1
 
     private val PERMISSIONS = arrayOf(
         Manifest.permission.RECORD_AUDIO,

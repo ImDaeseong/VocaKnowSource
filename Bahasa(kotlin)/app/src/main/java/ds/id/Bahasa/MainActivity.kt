@@ -1,6 +1,6 @@
 package ds.id.Bahasa
 
-import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -11,7 +11,6 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
@@ -22,29 +21,19 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Controls.FloatingTextView
 import ds.id.Bahasa.Controls.OnSingleClickListener
-import ds.id.Bahasa.Controls.PermissionUtil.checkSelfPermission
-import ds.id.Bahasa.Controls.PermissionUtil.requestPermissions
 import ds.id.Bahasa.Controls.ScreenLockutil
 import ds.id.Bahasa.Controls.UnitUtils.dip2px
-
 
 class MainActivity : AppCompatActivity() {
 
     private val tag = MainActivity::class.java.simpleName
 
-    /*
-    private var mainActivity: MainActivity? = null
-    fun getMainActivity(): MainActivity? {
-        return mainActivity
+    companion object {
+        lateinit var mContext: Context
+        var mActivity: MainActivity? = null
     }
-
-    private fun setMainActivity(mainActivity: MainActivity) {
-        this.mainActivity = mainActivity
-    }
-    */
 
     private var nSkinStyle = 0
     private var nBookResource = 0
@@ -68,7 +57,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setMainActivity(this)
+        mContext = applicationContext
+        mActivity = this
 
         InitTitleBar()
 
@@ -125,22 +115,6 @@ class MainActivity : AppCompatActivity() {
         getScreenLock()
 
         //initfloatingTextView()
-
-        //권한 체크
-        checkPermission()
-    }
-
-    private fun checkPermission() {
-
-        if (checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) &&
-            checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) &&
-            checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) &&
-            checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ) {
-            Log.e(tag, "권한 있음")
-        } else {
-            Log.e(tag, "권한이 없으면 권한 요청")
-            requestPermissions(this)
-        }
     }
 
     override fun onDestroy() {
@@ -205,43 +179,61 @@ class MainActivity : AppCompatActivity() {
 
     private fun InitTitleBar() {
 
-        nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-        try{
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-                window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 
+                nSkinStyle = BahasaApplication.getInstance().getSkinStyle()
                 when (nSkinStyle) {
                     0 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar1)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar1
+                        )
                     }
                     1 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar2)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar2
+                        )
                     }
                     2 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar3)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar3
+                        )
                     }
                     3 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar4)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar4
+                        )
                     }
                     4 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar5)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar5
+                        )
                     }
                     5 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar6)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar6
+                        )
                     }
                     6 -> {
-                        window!!.statusBarColor = ContextCompat.getColor(this, R.color.skin_statusbar7)
+                        window!!.statusBarColor = ContextCompat.getColor(
+                            this,
+                            R.color.skin_statusbar7
+                        )
                     }
                 }
             }
-
         }catch (e: Exception){
             Log.e(tag, "InitTitleBar error:" + e.message.toString())
         }
-
     }
 
     private fun Initdivider() {
@@ -396,9 +388,6 @@ class MainActivity : AppCompatActivity() {
 
     fun SelectTab(nIndex: Int, SelectMenuItem: String?) {
 
-        //Log.e(tag, "nIndex:$nIndex")
-        //Log.e(tag, "SelectMenuItem:$SelectMenuItem")
-
         try {
 
             val bundle = Bundle()
@@ -453,35 +442,21 @@ class MainActivity : AppCompatActivity() {
 
     fun setChangeSetting() {
 
-        //Log.e(tag, "setChangeSetting()")
-
         ChangeSkinStyle()
 
-        if (fragment1 != null) {//if (fragment1!!.activity != null) {
-
-            Log.e(tag, "setChangeSetting()-fragment1")
-
+        if (fragment1 != null) {
             fragment1!!.setChangeSetting()
         }
 
-        if (fragment2 != null) {//if (fragment2!!.activity != null) {
-
-            Log.e(tag, "setChangeSetting()-fragment2")
-
+        if (fragment2 != null) {
             fragment2!!.setChangeSetting()
         }
 
-        if (fragment3 != null) {//if (fragment3!!.activity != null) {
-
-            Log.e(tag, "setChangeSetting()-fragment3")
-
+        if (fragment3 != null) {
             fragment3!!.setChangeSetting()
         }
 
-        if (fragment4 != null) {//if (fragment4!!.activity != null) {
-
-            Log.e(tag, "setChangeSetting()-fragment4")
-
+        if (fragment4 != null) {
             fragment4!!.setChangeSetting()
         }
     }

@@ -14,7 +14,6 @@ import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Controls.*
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoSwipeLeft
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoSwipeRight
@@ -92,7 +91,6 @@ class Fragment3 : Fragment() {
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Log.e(tag, "onViewCreated")
         init()
 
         changeDisplay()
@@ -109,8 +107,6 @@ class Fragment3 : Fragment() {
     override fun onPause() {
         super.onPause()
 
-        //Log.e(tag, "onPause")
-
         try {
 
             if (bIsAutoPlay) {
@@ -123,8 +119,6 @@ class Fragment3 : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        //Log.e(tag, "onResume")
 
         try {
 
@@ -141,8 +135,6 @@ class Fragment3 : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        //Log.e(tag, "onDestroyView")
 
         try {
 
@@ -617,8 +609,6 @@ class Fragment3 : Fragment() {
     }
 
     fun setChangeSetting() {
-
-        //Log.e(tag, "setChangeSetting()");
 
         ChangeSkinStyle()
 

@@ -12,7 +12,6 @@ import android.widget.GridLayout
 import android.widget.ScrollView
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Common.gMenuItem
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoRotate
 import ds.id.Bahasa.Controls.OnSingleClickListener
@@ -191,8 +190,6 @@ class Fragment1 : Fragment() {
     }
 
     fun setChangeSetting() {
-
-        //Log.e(tag, "setChangeSetting()");
 
         ChangeSkinStyle()
     }

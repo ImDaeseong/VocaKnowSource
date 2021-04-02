@@ -93,8 +93,7 @@ object AnimatorUtil {
                 try {
 
                     //1번째 탭으로 이동
-                    val mainActivity = MainActivity()
-                    mainActivity.SelectTab(1, sText)
+                    MainActivity.mActivity?.SelectTab(1, sText)
 
                 } catch (ex: java.lang.Exception) {
                     Log.d(tag, ex.message.toString())

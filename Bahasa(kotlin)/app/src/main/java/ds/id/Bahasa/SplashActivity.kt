@@ -1,5 +1,6 @@
 package ds.id.Bahasa
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -14,6 +15,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import ds.id.Bahasa.Common.KataSetting
+import ds.id.Bahasa.Controls.PermissionUtil
+import ds.id.Bahasa.Controls.PermissionUtil.checkgranted
 import ds.id.Bahasa.Controls.RecycleUtil.recursiveRecycle
 import ds.id.Bahasa.Database.CopyDBfile
 
@@ -72,11 +75,42 @@ class SplashActivity : AppCompatActivity() {
             override fun handleMessage(msg: Message) {
                 when (msg.what) {
                     0 -> {
+
+                        //권한 체크
+                        checkPermission()
+
                         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                         finish()
                     }
                 }
             }
+        }
+    }
+
+    private fun checkPermission() {
+
+        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ){
+            Log.e(tag, "RECORD_AUDIO 권한 있음")
+        }else{
+            Log.e(tag, " RECORD_AUDIO 권한이 없으면 권한 요청")
+        }
+
+        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ){
+            Log.e(tag, "READ_EXTERNAL_STORAGE 권한 있음")
+        }else{
+            Log.e(tag, " READ_EXTERNAL_STORAGE 권한이 없으면 권한 요청")
+        }
+
+        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
+            Log.e(tag, "WRITE_EXTERNAL_STORAGE 권한 있음")
+        }else{
+            Log.e(tag, " WRITE_EXTERNAL_STORAGE 권한이 없으면 권한 요청")
+        }
+
+        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ){
+            Log.e(tag, " READ_PHONE_STATE권한 있음")
+        }else{
+            Log.e(tag, " READ_PHONE_STATE 권한이 없으면 권한 요청")
         }
     }
 

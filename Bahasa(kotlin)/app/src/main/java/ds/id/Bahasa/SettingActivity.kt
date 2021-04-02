@@ -155,8 +155,7 @@ class SettingActivity : AppCompatActivity() {
                         KataSetting.getInstance().kataTime = nKataTime
                         BahasaApplication.getInstance().setKataTime(nKataTime)
 
-                        val mainActivity = MainActivity()
-                        mainActivity.setChangeSetting()
+                        MainActivity.mActivity?.setChangeSetting()
                     }
                 } catch (e: Exception) {
                 }
@@ -175,8 +174,7 @@ class SettingActivity : AppCompatActivity() {
                         KataSetting.getInstance().wordKataTime = nWordKataTime
                         BahasaApplication.getInstance().setWordKataTime(nWordKataTime)
 
-                        val mainActivity = MainActivity()
-                        mainActivity.setChangeSetting()
+                        MainActivity.mActivity?.setChangeSetting()
                     }
                 } catch (e: Exception) {
                 }
@@ -190,8 +188,7 @@ class SettingActivity : AppCompatActivity() {
                 KataSetting.getInstance().kalimatSound = isChecked
                 BahasaApplication.getInstance().setKalimatSound(isChecked)
 
-                val mainActivity = MainActivity()
-                mainActivity.setChangeSetting()
+                MainActivity.mActivity?.setChangeSetting()
             } catch (e: Exception) {
             }
         }
@@ -203,8 +200,7 @@ class SettingActivity : AppCompatActivity() {
                 KataSetting.getInstance().kataSound = isChecked
                 BahasaApplication.getInstance().setKataSound(isChecked)
 
-                val mainActivity = MainActivity()
-                mainActivity.setChangeSetting()
+                MainActivity.mActivity?.setChangeSetting()
             } catch (e: Exception) {
             }
         }
@@ -216,9 +212,8 @@ class SettingActivity : AppCompatActivity() {
                 KataSetting.getInstance().screenLock = isChecked
                 BahasaApplication.getInstance().setScreenLock(isChecked)
 
-                val mainActivity = MainActivity()
-                mainActivity.getScreenLock()
-                mainActivity.setChangeSetting()
+                MainActivity.mActivity?.getScreenLock()
+                MainActivity.mActivity?.setChangeSetting()
             } catch (e: Exception) {
             }
         }
@@ -234,8 +229,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(0)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -251,8 +245,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(1)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -268,8 +261,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(2)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -285,8 +277,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(3)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -302,8 +293,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(4)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -319,8 +309,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(5)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
@@ -336,8 +325,7 @@ class SettingActivity : AppCompatActivity() {
                     BahasaApplication.getInstance().setSkinStyle(6)
                     InitSkinStyle()
 
-                    val mainActivity = MainActivity()
-                    mainActivity.setChangeSetting()
+                    MainActivity.mActivity?.setChangeSetting()
                 } catch (e: Exception) {
                 }
             }
