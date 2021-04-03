@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.io.IOException;
+import ds.id.Bahasa.Controls.AnimatorUtil;
 import ds.id.Bahasa.Controls.AudioPlayer;
 import ds.id.Bahasa.Controls.AudioRecorder;
 import ds.id.Bahasa.Controls.FileUtils;
@@ -309,12 +310,16 @@ public class EditKataActivity extends AppCompatActivity {
 
                 if(cL5.getVisibility() == View.VISIBLE){
 
-                    cL5.setVisibility(View.GONE);
-                    cL6.setVisibility(View.GONE);
+                    AnimatorUtil.AnimatoTopToBottom(cL5);
+                    AnimatorUtil.AnimatoTopToBottom(cL6);
+                    //cL5.setVisibility(View.GONE);
+                    //cL6.setVisibility(View.GONE);
                 }else {
 
                     cL5.setVisibility(View.VISIBLE);
                     cL6.setVisibility(View.VISIBLE);
+                    AnimatorUtil.AnimatoBottomToTop(cL5);
+                    AnimatorUtil.AnimatoBottomToTop(cL6);
                 }
 
             }

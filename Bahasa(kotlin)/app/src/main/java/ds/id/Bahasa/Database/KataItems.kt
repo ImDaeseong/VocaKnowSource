@@ -1,6 +1,5 @@
 package ds.id.Bahasa.Database
 
-
 data class KataItems(
     val  rIndex: Int,
     val  part1: String,

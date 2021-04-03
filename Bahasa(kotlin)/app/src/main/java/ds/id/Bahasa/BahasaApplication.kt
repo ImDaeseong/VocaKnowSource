@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Controls.SharedPreferencesUtil
 
 class BahasaApplication : Application() {

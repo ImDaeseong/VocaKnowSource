@@ -36,17 +36,19 @@ object AnimatorUtil {
         mover.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
-                //view.setClickable(true)
+                //view.isClickable = true
             }
         })
         mover.start()
 
         //스프링 효과
         if (view != null) {
-            val springForce = SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW)
+            val springForce = SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(
+                SpringForce.STIFFNESS_LOW
+            )
             val springAnimation = SpringAnimation(view, DynamicAnimation.TRANSLATION_X).setSpring(springForce).setStartValue(view.width.toFloat())
             springAnimation.addEndListener { animation, canceled, value, velocity ->
-                //view.setClickable(true)
+                //view.isClickable = true
             }
             springAnimation.start()
         }
@@ -62,7 +64,7 @@ object AnimatorUtil {
         mover.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
-                //view.setClickable(true)
+                //view.isClickable = true
             }
         })
         mover.start()
@@ -72,7 +74,7 @@ object AnimatorUtil {
             val springForce = SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW)
             val springAnimation = SpringAnimation(view, DynamicAnimation.TRANSLATION_X).setSpring(springForce).setStartValue(-view.width.toFloat())
             springAnimation.addEndListener { animation, canceled, value, velocity ->
-                //view.setClickable(true)
+                //view.isClickable = true
             }
             springAnimation.start()
         }
@@ -89,17 +91,49 @@ object AnimatorUtil {
             }
 
             override fun onAnimationEnd(animation: Animator) {
-
                 try {
-
                     //1번째 탭으로 이동
                     MainActivity.mActivity?.SelectTab(1, sText)
-
                 } catch (ex: java.lang.Exception) {
                     Log.d(tag, ex.message.toString())
                 }
             }
         })
         objectAnimator.start()
+    }
+
+    //아래에서 위로
+    fun AnimatoBottomToTop(view: View?) {
+        val objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 1000f, 500f, 200f, 50f, 0f)
+        objectAnimator.duration = 1000
+        objectAnimator.start()
+
+        //스프링 효과
+        if (view != null) {
+            val springForce = SpringForce(0f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW)
+            val springAnimation = SpringAnimation(view, DynamicAnimation.TRANSLATION_Y).setSpring(springForce).setStartValue(1000f)
+            springAnimation.addEndListener { animation, canceled, value, velocity ->
+                view.isClickable = true
+            }
+            springAnimation.start()
+        }
+    }
+
+    //위에서 아래로
+    fun AnimatoTopToBottom(view: View?) {
+        val objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 0f, 50f, 200f, 500f, 1000f)
+        objectAnimator.duration = 1000
+        objectAnimator.start()
+
+        //스프링 효과
+        if (view != null) {
+            val springForce = SpringForce(1000f).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW)
+            val springAnimation = SpringAnimation(view, DynamicAnimation.TRANSLATION_Y).setSpring(springForce).setStartValue(0f)
+            springAnimation.addEndListener { animation, canceled, value, velocity ->
+                //view.isClickable = true
+                view.visibility = View.GONE
+            }
+            springAnimation.start()
+        }
     }
 }

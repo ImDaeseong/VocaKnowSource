@@ -6,9 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-
 import androidx.dynamicanimation.animation.DynamicAnimation;
-import androidx.dynamicanimation.animation.FlingAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
 
@@ -114,5 +112,50 @@ public class AnimatorUtil {
             }
         });
         objectAnimator.start();
+    }
+
+    //아래에서 위로
+    public static void AnimatoBottomToTop(final View view){
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, View.TRANSLATION_Y, 1000, 500, 200, 50, 0);
+        objectAnimator.setDuration(1000);
+        objectAnimator.start();
+
+        //스프링 효과
+        if (view != null) {
+
+            SpringForce springForce = new SpringForce(0).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW);
+            SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.TRANSLATION_Y).setSpring(springForce).setStartValue(1000);
+            springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() {
+                @Override
+                public void onAnimationEnd(DynamicAnimation animation, boolean canceled, float value, float velocity) {
+
+                    //view.setClickable(true);
+                }
+            });
+            springAnimation.start();
+        }
+    }
+
+    //위에서 아래로
+    public static void AnimatoTopToBottom(final View view){
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, view.TRANSLATION_Y, 0, 50, 200, 500, 1000);
+        objectAnimator.setDuration(1000);
+        objectAnimator.start();
+
+        //스프링 효과
+        if (view != null) {
+
+            SpringForce springForce = new SpringForce(1000).setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY).setStiffness(SpringForce.STIFFNESS_LOW);
+            SpringAnimation springAnimation = new SpringAnimation(view, DynamicAnimation.TRANSLATION_Y).setSpring(springForce).setStartValue(0);
+            springAnimation.addEndListener(new DynamicAnimation.OnAnimationEndListener() {
+                @Override
+                public void onAnimationEnd(DynamicAnimation animation, boolean canceled, float value, float velocity) {
+
+                    //view.setClickable(true);
+                    view.setVisibility(View.GONE);
+                }
+            });
+            springAnimation.start();
+        }
     }
 }

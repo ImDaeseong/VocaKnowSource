@@ -14,7 +14,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import ds.id.Bahasa.Common.KataSetting
 import ds.id.Bahasa.Controls.OnSingleClickListener
 import ds.id.Bahasa.Controls.RecycleUtil.recursiveRecycle
 import ds.id.Bahasa.Database.KataManager

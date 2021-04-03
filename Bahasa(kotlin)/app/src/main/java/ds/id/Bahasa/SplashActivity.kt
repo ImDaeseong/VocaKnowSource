@@ -4,19 +4,19 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.os.AsyncTask
-import android.os.Bundle
-import android.os.Handler
-import android.os.Message
+import android.content.pm.PackageManager
+import android.os.*
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import ds.id.Bahasa.Common.KataSetting
-import ds.id.Bahasa.Controls.PermissionUtil
-import ds.id.Bahasa.Controls.PermissionUtil.checkgranted
 import ds.id.Bahasa.Controls.RecycleUtil.recursiveRecycle
 import ds.id.Bahasa.Database.CopyDBfile
 
@@ -28,6 +28,8 @@ class SplashActivity : AppCompatActivity() {
 
     private var handler: Handler? = null
     private var mainView: View? = null
+
+    private val permissions = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.INSTALL_SHORTCUT)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +69,23 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        when(requestCode){
+            1 -> {
+
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Log.e(tag, "PERMISSION_GRANTED")
+                } else {
+                    Log.e(tag, "PERMISSION_GRANTED NOT")
+                }
+
+                callMainActivity()
+            }
+        }
+    }
+
     private fun init() {
 
         mainView = findViewById(android.R.id.content)
@@ -77,40 +96,46 @@ class SplashActivity : AppCompatActivity() {
                     0 -> {
 
                         //권한 체크
-                        checkPermission()
-
-                        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-                        finish()
+                        if(hasPermissions(permissions)){
+                            callMainActivity()
+                        }else{
+                            ActivityCompat.requestPermissions(this@SplashActivity, permissions, 1)
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun checkPermission() {
-
-        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ){
-            Log.e(tag, "RECORD_AUDIO 권한 있음")
-        }else{
-            Log.e(tag, " RECORD_AUDIO 권한이 없으면 권한 요청")
+    private fun hasPermissions(permissions: Array<String>): Boolean {
+        permissions.forEach { permission ->
+            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
+                return false
         }
+        return true
+    }
 
-        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ){
-            Log.e(tag, "READ_EXTERNAL_STORAGE 권한 있음")
-        }else{
-            Log.e(tag, " READ_EXTERNAL_STORAGE 권한이 없으면 권한 요청")
-        }
+    private fun callMainActivity(){
 
-        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ){
-            Log.e(tag, "WRITE_EXTERNAL_STORAGE 권한 있음")
-        }else{
-            Log.e(tag, " WRITE_EXTERNAL_STORAGE 권한이 없으면 권한 요청")
-        }
+        //바탕화면 아이콘 추가
+        //addShortcut()
 
-        if (PermissionUtil.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ){
-            Log.e(tag, " READ_PHONE_STATE권한 있음")
-        }else{
-            Log.e(tag, " READ_PHONE_STATE 권한이 없으면 권한 요청")
+        Handler().postDelayed(Runnable {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }, 100)
+    }
+
+    private fun addShortcut(){
+
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(this)) {
+            val shortcutInfo = ShortcutInfoCompat.Builder(this, "#1")
+                .setIntent(Intent(this, SplashActivity::class.java).setAction(Intent.ACTION_MAIN))
+                .setShortLabel(getString(R.string.app_name))
+                .setIcon(IconCompat.createWithResource(this, R.mipmap.ic_launcher))
+                .build()
+            ShortcutManagerCompat.requestPinShortcut(this, shortcutInfo, null)
         }
     }
 

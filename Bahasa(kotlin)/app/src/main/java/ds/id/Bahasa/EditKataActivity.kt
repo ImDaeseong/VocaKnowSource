@@ -5,7 +5,6 @@ import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -16,7 +15,8 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import ds.id.Bahasa.Common.KataSetting
+import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoBottomToTop
+import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoTopToBottom
 import ds.id.Bahasa.Controls.OnSingleClickListener
 import ds.id.Bahasa.Controls.RecycleUtil.recursiveRecycle
 import ds.id.Bahasa.Controls.RoundImageView
@@ -153,19 +153,19 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "외국어1 정보를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어1 정보를 입력해주세요.",false)
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "외국어2 정보를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어2 정보를 입력해주세요.",false)
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "한국어 정보를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"한국어 정보를 입력해주세요.",false)
                     return
                 }
 
@@ -181,55 +181,12 @@ class EditKataActivity : AppCompatActivity() {
                 finish()
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
 
-                BahasaApplication.getInstance().Toast(this@EditKataActivity, "새로운 단어가 등록 되었습니다.", false)
+                BahasaApplication.getInstance().Toast(this@EditKataActivity,"새로운 단어가 등록 되었습니다.",false)
             }
         })
 
         //수정
         btnEdit!!.setOnClickListener(object : OnSingleClickListener() {
-            override fun onSingleClick(v: View) {
-
-                hideKeyboard()
-
-                val sKataIndo = et1!!.text.toString()
-                if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance()
-                        .Toast(this@EditKataActivity, "외국어1 정보를 입력해주세요.", false)
-                    return
-                }
-
-                val sKataIndoTambah = et2!!.text.toString()
-                if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance()
-                        .Toast(this@EditKataActivity, "외국어2 정보를 입력해주세요.", false)
-                    return
-                }
-
-                val sKataKor = et3!!.text.toString()
-                if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance()
-                        .Toast(this@EditKataActivity, "한국어 정보를 입력해주세요.", false)
-                    return
-                }
-
-                //수정
-                kataManager!!.UpdateRegKata(sSavedKataIndo!!, sKataIndo, sKataIndoTambah, sKataKor)
-
-                val intent = Intent()
-                intent.putExtra("KataIndo", sKataIndo)
-                intent.putExtra("KataIndoTambah", sKataIndoTambah)
-                intent.putExtra("KataKor", sKataKor)
-                setResult(2, intent)
-
-                finish()
-                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
-
-                BahasaApplication.getInstance().Toast(this@EditKataActivity, "선택된 단어가 수정 되었습니다.", false)
-            }
-        })
-
-        //삭제
-        btnDelete!!.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
 
                 hideKeyboard()
@@ -252,6 +209,46 @@ class EditKataActivity : AppCompatActivity() {
                     return
                 }
 
+                //수정
+                kataManager!!.UpdateRegKata(sSavedKataIndo!!, sKataIndo, sKataIndoTambah, sKataKor)
+
+                val intent = Intent()
+                intent.putExtra("KataIndo", sKataIndo)
+                intent.putExtra("KataIndoTambah", sKataIndoTambah)
+                intent.putExtra("KataKor", sKataKor)
+                setResult(2, intent)
+
+                finish()
+                overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
+
+                BahasaApplication.getInstance().Toast(this@EditKataActivity,"선택된 단어가 수정 되었습니다.",false)
+            }
+        })
+
+        //삭제
+        btnDelete!!.setOnClickListener(object : OnSingleClickListener() {
+            override fun onSingleClick(v: View) {
+
+                hideKeyboard()
+
+                val sKataIndo = et1!!.text.toString()
+                if (TextUtils.isEmpty(sKataIndo)) {
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어1 정보를 입력해주세요.",false)
+                    return
+                }
+
+                val sKataIndoTambah = et2!!.text.toString()
+                if (TextUtils.isEmpty(sKataIndoTambah)) {
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어2 정보를 입력해주세요.",false)
+                    return
+                }
+
+                val sKataKor = et3!!.text.toString()
+                if (TextUtils.isEmpty(sKataKor)) {
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"한국어 정보를 입력해주세요.",false)
+                    return
+                }
+
                 //삭제
                 kataManager!!.DeleteRegKata(sSavedKataIndo!!)
 
@@ -264,7 +261,7 @@ class EditKataActivity : AppCompatActivity() {
                 finish()
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
 
-                BahasaApplication.getInstance().Toast(this@EditKataActivity, "선택된 단어가 삭제 되었습니다.", false)
+                BahasaApplication.getInstance().Toast(this@EditKataActivity,"선택된 단어가 삭제 되었습니다.",false)
             }
         })
 
@@ -276,30 +273,34 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음할 단어를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"녹음할 단어를 입력해주세요.",false)
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음할 단어를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"녹음할 단어를 입력해주세요.",false)
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음할 단어를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"녹음할 단어를 입력해주세요.",false)
                     return
                 }
 
                 if (cL5!!.visibility == View.VISIBLE) {
 
-                    cL5!!.visibility = View.GONE
-                    cL6!!.visibility = View.GONE
+                    AnimatoTopToBottom(cL5)
+                    AnimatoTopToBottom(cL6)
+                    //cL5!!.visibility = View.GONE
+                    //cL6!!.visibility = View.GONE
                 } else {
 
                     cL5!!.visibility = View.VISIBLE
                     cL6!!.visibility = View.VISIBLE
+                    AnimatoBottomToTop(cL5)
+                    AnimatoBottomToTop(cL6)
                 }
 
             }
@@ -359,7 +360,10 @@ class EditKataActivity : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
     }
 
     private fun InitSkinStyle() {
