@@ -229,7 +229,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ds.id.Bahasa.Controls.RoundConstraintLayout
                 android:id="@+id/cL5"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="14dp"
@@ -271,9 +271,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/btnRecord"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </ds.id.Bahasa.Controls.RoundConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ds.id.Bahasa.Controls.RoundConstraintLayout
                 android:id="@+id/cL6"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="14dp"
@@ -341,7 +341,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </ds.id.Bahasa.Controls.RoundConstraintLayout>
 
             <View
                 android:id="@+id/view1"

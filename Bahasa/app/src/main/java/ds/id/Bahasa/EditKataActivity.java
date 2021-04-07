@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -321,7 +322,6 @@ public class EditKataActivity extends AppCompatActivity {
                     AnimatorUtil.AnimatoBottomToTop(cL5);
                     AnimatorUtil.AnimatoBottomToTop(cL6);
                 }
-
             }
         });
 
