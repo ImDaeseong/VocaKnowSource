@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.io.File;
 import java.io.IOException;
 import ds.id.Bahasa.Controls.AnimatorUtil;
 import ds.id.Bahasa.Controls.AudioPlayer;
@@ -54,6 +57,10 @@ public class EditKataActivity extends AppCompatActivity {
 
     private TextView currentTime, totalTime;
     private ProgressBar pb1;
+
+    private AudioRecorder audioRecorder = null;
+    private AudioPlayer audioPlayer = null;
+    private int length = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,9 @@ public class EditKataActivity extends AppCompatActivity {
     }
 
     private void init(){
+
+        audioRecorder = new AudioRecorder(this);
+        audioPlayer = AudioPlayer.getInstance();
 
         include = findViewById(R.id.bahasa_toolbar);
 
@@ -332,6 +342,25 @@ public class EditKataActivity extends AppCompatActivity {
 
                 hideKeyboard();
 
+                String sKataIndo = et1.getText().toString();
+                if( TextUtils.isEmpty( sKataIndo )){
+                    BahasaApplication.getInstance().Toast(EditKataActivity.this, "녹음할 단어를 입력해주세요.", false);
+                    return;
+                }
+
+                if(audioRecorder.isRecording()) {
+
+                    lblRecord.setText("버튼을 클릭하면 녹음이 시작됩니다.");
+                    length = audioRecorder.stopRecord();
+                    audioRecorder.release();
+
+                } else {
+
+                    lblRecord.setText("현재 녹음이 시작되었습니다.");
+
+                    audioRecorder.startRecord(sKataIndo);
+                }
+
             }
         });
 
@@ -341,6 +370,42 @@ public class EditKataActivity extends AppCompatActivity {
             public void onSingleClick(View v) {
 
                 hideKeyboard();
+
+                String sKataIndo = et1.getText().toString();
+                String sFile = sKataIndo + ".aac";
+                File saveFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), sFile);
+                if(saveFolder == null){
+
+                    BahasaApplication.getInstance().Toast(EditKataActivity.this, "녹음된 파일이 존재하지 않습니다.", false);
+                    return;
+                }
+
+                if(audioRecorder.isRecording()){
+                    return;
+                }
+
+                if(audioPlayer.isPlaying()){
+
+                    lblRecord.setText("녹음내용 미리 듣기 중입니다.");
+                }
+
+                /*
+                audioPlayer.play(saveFolder.getPath(), new AudioPlayer.OnMediaPlayerListener() {
+                    @Override
+                    public void onCompletion(boolean bComplete) {
+
+                        Log.e(TAG, "녹음된 내용을 전부 들었습니다.");
+                    }
+
+                    @Override
+                    public void onPrepared(int mDuration) {
+
+                        Log.e(TAG, "녹음된 파일이 준비가 되었습니다.");
+                    }
+                });
+                audioPlayer.start();
+                */
+
             }
         });
 

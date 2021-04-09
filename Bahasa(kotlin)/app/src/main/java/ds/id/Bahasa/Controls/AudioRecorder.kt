@@ -13,13 +13,14 @@ class AudioRecorder {
 
     companion object {
 
-        private var mediaRecorder: MediaRecorder? = null
-        private val AudioFilePath: String = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).path
-        private var recordFile: File? = null
-        var isRecording = false
+        private var recorder: MediaRecorder? = null
+        private var saveFolder: File? = null
+        private var mContext: Context? = null
+        private var isRecording = false
+        private var recordingStart: Long = 0
 
         private var instance: AudioRecorder? = null
-        fun getInstance(context: Context): AudioRecorder {
+        fun getInstance(): AudioRecorder {
             if (instance == null) {
                 instance = AudioRecorder()
             }
@@ -27,91 +28,74 @@ class AudioRecorder {
         }
     }
 
-    fun getFilePath(Filename: String): String {
-        return "$AudioFilePath/$Filename.amr"
+    fun AudioRecorder(context: Context) {
+        recorder = MediaRecorder()
+        mContext = context
     }
 
-    @Throws(IOException::class)
-    fun StartRecord(Filename: String) {
+    fun startRecord(sfilename: String): Boolean {
+        return if (!isRecording) {
 
-        if (!isRecording) {
+            val sFile = "$sfilename.aac"
+            saveFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), sFile)
+
+            if (recorder == null) {
+                recorder = MediaRecorder()
+            }
 
             try {
-
-                if (mediaRecorder != null) {
-                    mediaRecorder!!.reset()
-                    mediaRecorder!!.release()
-                    mediaRecorder = null
-                }
-
-                mediaRecorder = MediaRecorder()
-                mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
-                mediaRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-                mediaRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-                mediaRecorder!!.setAudioSamplingRate(16000)
-
-                val sPath = "$AudioFilePath/$Filename.amr"
-                recordFile = File(sPath)
-                mediaRecorder!!.setOutputFile(sPath)
-
-                if (mediaRecorder != null) {
-                    mediaRecorder!!.prepare()
-                    mediaRecorder!!.start()
-                }
+                recorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+                recorder!!.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS)
+                recorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+                recorder!!.setOutputFile(saveFolder!!.absolutePath)
+                recorder!!.prepare()
+                recorder!!.start()
+                recordingStart = System.currentTimeMillis()
                 isRecording = true
-
-            } catch (ignore: IOException) {
-                Log.e(tag, ignore.message.toString())
-                isRecording = false
+                true
+            } catch (iex: IOException) {
+                iex.printStackTrace()
+                false
             }
+        } else {
+            true
         }
     }
 
-    fun StopRecord() {
-        try {
+    fun stopRecord(): Int {
+        var nDuration = 0
+
+        if (recorder != null) {
+
+            nDuration = ((System.currentTimeMillis() - recordingStart) / 1000).toInt()
+            isRecording = false
+
             if (isRecording) {
-                if (mediaRecorder != null) {
-                    mediaRecorder!!.stop()
-                    mediaRecorder!!.reset()
-                    mediaRecorder!!.release()
-                    mediaRecorder = null
-                }
-                isRecording = false
+                recorder!!.stop()
             }
+
+            recorder!!.reset()
+            recorder!!.release()
+            recorder = null
+        }
+        return nDuration
+    }
+
+    fun release() {
+        try {
+            recorder!!.stop()
+            recorder!!.release()
+            recorder = null
         } catch (ex: Exception) {
             ex.message.toString()
         }
     }
 
-    fun deleteFile() {
-        try {
-            if (recordFile != null) {
-                if (recordFile!!.exists()) {
-                    recordFile!!.delete()
-                }
-                isRecording = false
-                recordFile = null
-            }
-        } catch (ex: java.lang.Exception) {
-            ex.message.toString()
-        }
-    }
-
-    fun isFileExist(): Boolean {
-        var bFile = false
-        try {
-            if (recordFile != null) {
-                if (recordFile!!.exists()) {
-                    bFile = true
-                }
-            }
-        } catch (ex: java.lang.Exception) {
-            ex.message.toString()
-        }
-        return bFile
-    }
-
-    fun isRecording(): Boolean? {
+    fun isRecording(): Boolean {
         return isRecording
+    }
+
+    fun getSaveFolder(): File? {
+        return saveFolder
     }
 }

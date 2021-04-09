@@ -4,7 +4,9 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Environment
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -17,10 +19,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoBottomToTop
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoTopToBottom
+import ds.id.Bahasa.Controls.AudioPlayer
+import ds.id.Bahasa.Controls.AudioRecorder
 import ds.id.Bahasa.Controls.OnSingleClickListener
 import ds.id.Bahasa.Controls.RecycleUtil.recursiveRecycle
 import ds.id.Bahasa.Controls.RoundImageView
 import ds.id.Bahasa.Database.KataManager
+import java.io.File
 
 class EditKataActivity : AppCompatActivity() {
 
@@ -55,6 +60,10 @@ class EditKataActivity : AppCompatActivity() {
 
     private var pb1: ProgressBar? = null
 
+    private var audioRecorder: AudioRecorder? = null
+    private var audioPlayer: AudioPlayer? = null
+    private var length = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -87,6 +96,11 @@ class EditKataActivity : AppCompatActivity() {
     }
 
     private fun init() {
+
+        audioRecorder = AudioRecorder.getInstance()
+        audioRecorder!!.AudioRecorder(this)
+
+        audioPlayer = AudioPlayer.getInstance(this)
 
         include = findViewById(R.id.bahasa_toolbar)
 
@@ -193,19 +207,19 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "외국어1 정보를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어1 정보를 입력해주세요.",false)
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "외국어2 정보를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어2 정보를 입력해주세요.",false)
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "한국어 정보를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"한국어 정보를 입력해주세요.",false)
                     return
                 }
 
@@ -310,6 +324,23 @@ class EditKataActivity : AppCompatActivity() {
         cL5!!.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
                 hideKeyboard()
+
+                val sKataIndo = et1!!.text.toString()
+                if (TextUtils.isEmpty(sKataIndo)) {
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음할 단어를 입력해주세요.", false)
+                    return
+                }
+
+                if (audioRecorder!!.isRecording()) {
+
+                    lblRecord!!.text = "버튼을 클릭하면 녹음이 시작됩니다."
+                    length = audioRecorder!!.stopRecord()
+                    audioRecorder!!.release()
+                } else {
+
+                    lblRecord!!.text = "현재 녹음이 시작되었습니다."
+                    audioRecorder!!.startRecord(sKataIndo)
+                }
             }
         })
 
@@ -317,6 +348,36 @@ class EditKataActivity : AppCompatActivity() {
         cL6!!.setOnClickListener(object : OnSingleClickListener() {
             override fun onSingleClick(v: View) {
                 hideKeyboard()
+
+                val sKataIndo = et1!!.text.toString()
+                val sFile = "$sKataIndo.aac"
+                val saveFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), sFile)
+
+                if (saveFolder == null) {
+                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음된 파일이 존재하지 않습니다.", false)
+                    return
+                }
+
+                if (audioRecorder!!.isRecording()) {
+                    return
+                }
+
+                if (audioPlayer!!.isPlaying()) {
+                    lblRecord!!.text = "녹음내용 미리 듣기 중입니다."
+                }
+
+                /*
+                audioPlayer!!.play(saveFolder.path, object : AudioPlayer.OnMediaPlayerListener {
+                    override fun onCompletion(bComplete: Boolean) {
+                        Log.e(tag, "녹음된 내용을 전부 들었습니다.")
+                    }
+
+                    override fun onPrepared(mDuration: Int) {
+                        Log.e(tag, "녹음된 파일이 준비가 되었습니다.")
+                    }
+                })
+                */
+
             }
         })
     }

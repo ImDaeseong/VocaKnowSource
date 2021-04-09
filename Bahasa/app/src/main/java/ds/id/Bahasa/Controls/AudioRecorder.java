@@ -1,9 +1,9 @@
 package ds.id.Bahasa.Controls;
 
+import android.content.Context;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -11,116 +11,90 @@ public class AudioRecorder {
 
     private static final String TAG = AudioRecorder.class.getName();
 
-    private static MediaRecorder mediaRecorder = null;
-
-    private final String AudioFilePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC).getPath();
-
-    private File recordFile;
+    private MediaRecorder recorder = null;
+    private File saveFolder = null;
+    private Context context = null;
     private boolean isRecording = false;
+    private long recordingStart = 0;
 
-    private static AudioRecorder instance;
-    public static AudioRecorder getInstance(){
-
-        if( instance == null){
-            instance = new AudioRecorder();
+    private static AudioRecorder instance = null;
+    public static AudioRecorder getInstance(Context context) {
+        if(instance == null) {
+            instance = new AudioRecorder(context);
         }
         return instance;
     }
 
-    public String getFilePath(String Filename){
-        String sPath = AudioFilePath + "/" + Filename + ".amr";
-        return sPath;
+    public AudioRecorder(Context context) {
+        this.recorder = new MediaRecorder();
+        this.context = context;
     }
 
-    public void StartRecord(String Filename) throws IOException {
+    public boolean startRecord(String sfilename) {
 
         if(!isRecording) {
 
-            try {
+            String sFile = sfilename + ".aac";
+            this.saveFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), sFile);
 
-                if (mediaRecorder != null) {
-                    mediaRecorder.reset();
-                    mediaRecorder.release();
-                    mediaRecorder = null;
-                }
-
-                mediaRecorder = new MediaRecorder();
-                mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                mediaRecorder.setAudioSamplingRate(16000);
-
-                String sPath = AudioFilePath + "/" + Filename + ".amr";
-                recordFile = new File(sPath);
-                mediaRecorder.setOutputFile(sPath);
-
-                if (mediaRecorder != null) {
-                    mediaRecorder.prepare();
-                    mediaRecorder.start();
-                }
-                isRecording = true;
-
-            } catch (IOException ignore) {
-                Log.e(TAG, ignore.getMessage().toString());
-                isRecording = false;
+            if (this.recorder == null) {
+                this.recorder = new MediaRecorder();
             }
+
+            try {
+                recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS);
+                recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+                recorder.setOutputFile(this.saveFolder.getAbsolutePath());
+                recorder.prepare();
+                recorder.start();
+
+                recordingStart = System.currentTimeMillis();
+                this.isRecording = true;
+                return true;
+            } catch (IOException iex) {
+                iex.printStackTrace();
+                return false;
+            }
+        } else {
+            return true;
         }
     }
 
-    public void StopRecord(){
+    public int stopRecord() {
+        int nDuration = 0;
 
-        try {
+        if(recorder != null) {
+
+            nDuration = (int) ((System.currentTimeMillis() - recordingStart) / 1000);
+            isRecording = false;
 
             if(isRecording) {
-
-                if (mediaRecorder != null) {
-                    mediaRecorder.stop();
-                    mediaRecorder.reset();
-                    mediaRecorder.release();
-                    mediaRecorder = null;
-                }
-                isRecording = false;
+                recorder.stop();
             }
-        }catch (Exception ex){
-            ex.getMessage().toString();
+
+            recorder.reset();
+            recorder.release();
+            recorder = null;
         }
+        return nDuration;
     }
 
-    public void deleteFile(){
-
-        try{
-
-            if (recordFile != null) {
-                if (recordFile.exists()) {
-                    recordFile.delete();
-                }
-                isRecording = false;
-                recordFile = null;
-            }
-        }catch (Exception ex){
-            ex.getMessage().toString();
-        }
-    }
-
-    public boolean isFileExist() {
-
-        boolean bFile = false;
-
+    public void release() {
         try {
-
-            if (recordFile != null) {
-                if (recordFile.exists()) {
-                    bFile = true;
-                }
-            }
-        }catch (Exception ex){
+            recorder.stop();
+            recorder.release();
+            recorder = null;
+        } catch(Exception ex){
             ex.getMessage().toString();
         }
-
-        return bFile;
     }
 
     public boolean isRecording() {
         return isRecording;
+    }
+
+    public File getSaveFolder() {
+        return saveFolder;
     }
 }

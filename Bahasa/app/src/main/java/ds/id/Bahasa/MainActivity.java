@@ -145,9 +145,7 @@ public class MainActivity extends AppCompatActivity {
     private void checkPermission(){
 
         if ( PermissionUtil.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) &&
-                PermissionUtil.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) &&
-                PermissionUtil.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) &&
-                PermissionUtil.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) ) {
+             PermissionUtil.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ) {
 
             //Log.e(TAG, "권한 있음");
         } else  {

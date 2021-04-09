@@ -42,6 +42,8 @@ public class AudioPlayer {
 
             if (mediaPlayer != null) {
 
+                mediaPlayer.reset();
+
                 this.onMediaPlayerListener = onMediaPlayerListener;
                 mediaPlayer.setDataSource(sPath);
                 mediaPlayer.prepare();
