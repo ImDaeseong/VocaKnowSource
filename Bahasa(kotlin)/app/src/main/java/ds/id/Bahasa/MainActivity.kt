@@ -1,7 +1,9 @@
 package ds.id.Bahasa
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Point
@@ -15,6 +17,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         lateinit var mContext: Context
         var mActivity: MainActivity? = null
     }
+
+    private val permissions = arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     private var nSkinStyle = 0
     private var nBookResource = 0
@@ -115,6 +120,43 @@ class MainActivity : AppCompatActivity() {
         getScreenLock()
 
         //initfloatingTextView()
+
+        //권한 체크
+        checkPermissions()
+    }
+
+    private fun hasPermissions(context: Context?, vararg permissions: String): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (permission in permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+
+    private fun checkPermissions() {
+        if (!hasPermissions(this, *permissions)) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO) ||
+                ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(this, permissions, 1)
+            } else {
+                ActivityCompat.requestPermissions(this, permissions, 1)
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == 1) {
+            for (i in permissions.indices) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(tag, "권한이 승인됨 상태:" + permissions[i])
+                } else {
+                    Log.e(tag, "권한이 승인되지 않음 상태:" + permissions[i])
+                }
+            }
+        }
     }
 
     override fun onDestroy() {
@@ -244,60 +286,25 @@ class MainActivity : AppCompatActivity() {
 
             when (nSkinStyle) {
                 0 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline1
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline1))
                 }
                 1 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline2
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline2))
                 }
                 2 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline3
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline3))
                 }
                 3 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline4
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline4))
                 }
                 4 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline5
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline5))
                 }
                 5 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline6
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline6))
                 }
                 6 -> {
-                    divider_line!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            this,
-                            R.color.skin_divideline7
-                        )
-                    )
+                    divider_line!!.setBackgroundColor(ContextCompat.getColor(this, R.color.skin_divideline7))
                 }
             }
 

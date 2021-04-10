@@ -2,10 +2,14 @@ package ds.id.Bahasa;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -346,6 +350,13 @@ public class EditKataActivity extends AppCompatActivity {
 
                 hideKeyboard();
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (ActivityCompat.checkSelfPermission(EditKataActivity.this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                        BahasaApplication.getInstance().Toast(EditKataActivity.this, "음성파일 저장 권한이 없습니다.", false);
+                        return;
+                    }
+                }
+
                 String sKataIndo = et1.getText().toString();
                 if( TextUtils.isEmpty( sKataIndo )){
                     BahasaApplication.getInstance().Toast(EditKataActivity.this, "녹음할 단어를 입력해주세요.", false);
@@ -378,7 +389,11 @@ public class EditKataActivity extends AppCompatActivity {
                 String sFile = sKataIndo + ".aac";
                 File saveFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), sFile);
                 if(saveFolder == null){
+                    BahasaApplication.getInstance().Toast(EditKataActivity.this, "녹음된 파일이 존재하지 않습니다.", false);
+                    return;
+                }
 
+                if(!saveFolder.exists()){
                     BahasaApplication.getInstance().Toast(EditKataActivity.this, "녹음된 파일이 존재하지 않습니다.", false);
                     return;
                 }

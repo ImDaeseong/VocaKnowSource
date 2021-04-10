@@ -1,17 +1,14 @@
 package ds.id.Bahasa
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
 import android.os.*
 import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -28,8 +25,6 @@ class SplashActivity : AppCompatActivity() {
 
     private var handler: Handler? = null
     private var mainView: View? = null
-
-    private val permissions = arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INSTALL_SHORTCUT)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,23 +64,6 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        when(requestCode){
-            1 -> {
-
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Log.e(tag, "PERMISSION_GRANTED")
-                } else {
-                    Log.e(tag, "PERMISSION_GRANTED NOT")
-                }
-
-                callMainActivity()
-            }
-        }
-    }
-
     private fun init() {
 
         mainView = findViewById(android.R.id.content)
@@ -94,25 +72,11 @@ class SplashActivity : AppCompatActivity() {
             override fun handleMessage(msg: Message) {
                 when (msg.what) {
                     0 -> {
-
-                        //권한 체크
-                        if(hasPermissions(permissions)){
-                            callMainActivity()
-                        }else{
-                            ActivityCompat.requestPermissions(this@SplashActivity, permissions, 1)
-                        }
+                        callMainActivity()
                     }
                 }
             }
         }
-    }
-
-    private fun hasPermissions(permissions: Array<String>): Boolean {
-        permissions.forEach { permission ->
-            if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED)
-                return false
-        }
-        return true
     }
 
     private fun callMainActivity(){
@@ -196,13 +160,11 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun InitTitleBar() {
+
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     private fun InitSkinStyle() {

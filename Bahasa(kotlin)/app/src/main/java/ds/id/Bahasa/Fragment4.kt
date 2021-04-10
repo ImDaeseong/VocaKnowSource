@@ -201,12 +201,7 @@ class Fragment4 : Fragment() {
                     regKataAdapter!!.notifyDataSetChanged()
 
                     fab2!!.visibility = View.VISIBLE
-                    fab1!!.setBackgroundColor(
-                        ContextCompat.getColor(
-                            mContext!!,
-                            nSkinStyleResource
-                        )
-                    )
+                    fab1!!.setBackgroundColor(ContextCompat.getColor(mContext!!, nSkinStyleResource))
                 }
             }
         })
