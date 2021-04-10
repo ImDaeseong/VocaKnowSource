@@ -8,7 +8,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,13 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.io.File;
-import java.io.IOException;
 import ds.id.Bahasa.Controls.AnimatorUtil;
 import ds.id.Bahasa.Controls.AudioPlayer;
 import ds.id.Bahasa.Controls.AudioRecorder;
-import ds.id.Bahasa.Controls.FileUtils;
 import ds.id.Bahasa.Controls.OnSingleClickListener;
 import ds.id.Bahasa.Controls.PlayerTimer;
 import ds.id.Bahasa.Controls.RecycleUtil;
@@ -62,6 +58,8 @@ public class EditKataActivity extends AppCompatActivity {
     private AudioPlayer audioPlayer = null;
     private int length = 0;
 
+    private PlayerTimer playerTimer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +93,12 @@ public class EditKataActivity extends AppCompatActivity {
         super.onDestroy();
 
         try {
+
+            if(audioPlayer != null) {
+                audioPlayer.release();
+            }
+
+            stopplayerTimer();
 
             RecycleUtil.recursiveRecycle(getWindow().getDecorView());
             System.gc();
@@ -357,7 +361,6 @@ public class EditKataActivity extends AppCompatActivity {
                 } else {
 
                     lblRecord.setText("현재 녹음이 시작되었습니다.");
-
                     audioRecorder.startRecord(sKataIndo);
                 }
 
@@ -380,35 +383,109 @@ public class EditKataActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(audioRecorder.isRecording()){
-                    return;
+                if(audioRecorder != null) {
+                    if (audioRecorder.isRecording()) {
+                        return;
+                    }
                 }
 
-                if(audioPlayer.isPlaying()){
-
-                    lblRecord.setText("녹음내용 미리 듣기 중입니다.");
+                if(audioPlayer != null) {
+                    if (audioPlayer.isPlaying()) {
+                        return;
+                    }
                 }
 
-                /*
+                audioPlayer.init();
                 audioPlayer.play(saveFolder.getPath(), new AudioPlayer.OnMediaPlayerListener() {
                     @Override
                     public void onCompletion(boolean bComplete) {
 
-                        Log.e(TAG, "녹음된 내용을 전부 들었습니다.");
+                        //Log.e(TAG, "녹음된 내용을 전부 들었습니다.");
+
+                        lblRecord.setText("버튼을 클릭하면 녹음이 시작됩니다.");
+                        stopplayerTimer();
+                        initDisplaytime();
+
+                        int duration = audioPlayer.getDuration();
+                        pb1.setProgress(0);
+                        pb1.setMax(duration);
                     }
 
                     @Override
                     public void onPrepared(int mDuration) {
 
-                        Log.e(TAG, "녹음된 파일이 준비가 되었습니다.");
+                        //Log.e(TAG, "녹음된 파일이 준비가 되었습니다.");
+
+                        initDisplaytime();
                     }
                 });
-                audioPlayer.start();
-                */
 
+                lblRecord.setText("녹음내용 미리 듣기 중입니다.");
+                audioPlayer.start();
+                setSeekBarProgress();
             }
         });
 
+    }
+
+    private void setSeekBarProgress(){
+
+        stopplayerTimer();
+
+        playerTimer = new PlayerTimer();
+        playerTimer.setCallback(new PlayerTimer.Callback() {
+            @Override
+            public void onTick(long timeMillis) {
+
+                if (audioPlayer == null) return;
+
+                int position = audioPlayer.getCurrentPosition();
+                int duration = audioPlayer.getDuration();
+
+                if (duration <= 0) return;
+
+                pb1.setMax(duration);
+                pb1.setProgress(position);
+
+                int nEndTime = duration / 1000;
+                int nEndMinutes = (nEndTime / 60) % 60;
+                int nEndSeconds = nEndTime % 60;
+
+                int nCurrentTime = position / 1000;
+                int nCurrentMinutes = (nCurrentTime / 60) % 60;
+                int nCurrentSeconds = nCurrentTime % 60;
+
+                currentTime.setText(String.format("%02d:%02d", nCurrentMinutes, nCurrentSeconds));
+                totalTime.setText(String.format("%02d:%02d", nEndMinutes, nEndSeconds));
+            }
+        });
+        playerTimer.start();
+    }
+
+    private void stopplayerTimer(){
+
+        if(playerTimer != null){
+            playerTimer.stop();
+            playerTimer.removeMessages(0);
+        }
+    }
+
+    private void initDisplaytime(){
+
+        if(audioPlayer == null)
+            return;
+
+        int nEndTime = audioPlayer.getDuration() / 1000;
+        int nEndMinutes = (nEndTime / 60) % 60;
+        int nEndSeconds = nEndTime % 60;
+
+        int nCurrentTime = audioPlayer.getCurrentPosition() / 1000;
+        int nCurrentMinutes = (nCurrentTime / 60) % 60;
+        int nCurrentSeconds = nCurrentTime % 60;
+
+        //currentTime.setText(String.format("%02d:%02d", nCurrentMinutes, nCurrentSeconds));
+        currentTime.setText(String.format("00:00", nCurrentMinutes, nCurrentSeconds));
+        totalTime.setText(String.format("%02d:%02d", nEndMinutes, nEndSeconds));
     }
 
     private void InitData(){

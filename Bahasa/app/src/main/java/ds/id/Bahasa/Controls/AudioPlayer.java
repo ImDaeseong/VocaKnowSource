@@ -20,6 +20,13 @@ public class AudioPlayer {
         return instance;
     }
 
+    public void init(){
+
+        if(mediaPlayer == null){
+            mediaPlayer = new MediaPlayer();
+        }
+    }
+
     public void release() {
 
         try {
@@ -27,7 +34,6 @@ public class AudioPlayer {
             removeListener();
 
             if (mediaPlayer != null) {
-                mediaPlayer.stop();
                 mediaPlayer.release();
                 mediaPlayer = null;
             }
@@ -102,7 +108,6 @@ public class AudioPlayer {
 
         if(mediaPlayer != null && mediaPlayer.isPlaying()){
             mediaPlayer.stop();
-            mediaPlayer.reset();
         }
     }
 

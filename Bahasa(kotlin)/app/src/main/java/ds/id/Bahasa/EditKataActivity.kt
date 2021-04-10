@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Environment
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -17,13 +16,10 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import ds.id.Bahasa.Controls.*
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoBottomToTop
 import ds.id.Bahasa.Controls.AnimatorUtil.AnimatoTopToBottom
-import ds.id.Bahasa.Controls.AudioPlayer
-import ds.id.Bahasa.Controls.AudioRecorder
-import ds.id.Bahasa.Controls.OnSingleClickListener
 import ds.id.Bahasa.Controls.RecycleUtil.recursiveRecycle
-import ds.id.Bahasa.Controls.RoundImageView
 import ds.id.Bahasa.Database.KataManager
 import java.io.File
 
@@ -64,6 +60,8 @@ class EditKataActivity : AppCompatActivity() {
     private var audioPlayer: AudioPlayer? = null
     private var length = 0
 
+    private var playerTimer: PlayerTimer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -89,6 +87,13 @@ class EditKataActivity : AppCompatActivity() {
         super.onDestroy()
 
         try {
+
+            if (audioPlayer != null) {
+                audioPlayer!!.release()
+            }
+
+            stopplayerTimer()
+
             recursiveRecycle(window.decorView)
             System.gc()
         } catch (e: Exception) {
@@ -167,19 +172,31 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어1 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "외국어1 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어2 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "외국어2 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"한국어 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "한국어 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
@@ -195,7 +212,11 @@ class EditKataActivity : AppCompatActivity() {
                 finish()
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
 
-                BahasaApplication.getInstance().Toast(this@EditKataActivity,"새로운 단어가 등록 되었습니다.",false)
+                BahasaApplication.getInstance().Toast(
+                    this@EditKataActivity,
+                    "새로운 단어가 등록 되었습니다.",
+                    false
+                )
             }
         })
 
@@ -207,19 +228,31 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어1 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "외국어1 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어2 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "외국어2 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"한국어 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "한국어 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
@@ -235,7 +268,11 @@ class EditKataActivity : AppCompatActivity() {
                 finish()
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
 
-                BahasaApplication.getInstance().Toast(this@EditKataActivity,"선택된 단어가 수정 되었습니다.",false)
+                BahasaApplication.getInstance().Toast(
+                    this@EditKataActivity,
+                    "선택된 단어가 수정 되었습니다.",
+                    false
+                )
             }
         })
 
@@ -247,19 +284,31 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어1 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "외국어1 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"외국어2 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "외국어2 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"한국어 정보를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "한국어 정보를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
@@ -275,7 +324,11 @@ class EditKataActivity : AppCompatActivity() {
                 finish()
                 overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom)
 
-                BahasaApplication.getInstance().Toast(this@EditKataActivity,"선택된 단어가 삭제 되었습니다.",false)
+                BahasaApplication.getInstance().Toast(
+                    this@EditKataActivity,
+                    "선택된 단어가 삭제 되었습니다.",
+                    false
+                )
             }
         })
 
@@ -287,19 +340,31 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"녹음할 단어를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "녹음할 단어를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataIndoTambah = et2!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndoTambah)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"녹음할 단어를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "녹음할 단어를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
                 val sKataKor = et3!!.text.toString()
                 if (TextUtils.isEmpty(sKataKor)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity,"녹음할 단어를 입력해주세요.",false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "녹음할 단어를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
@@ -327,7 +392,11 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 if (TextUtils.isEmpty(sKataIndo)) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음할 단어를 입력해주세요.", false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "녹음할 단어를 입력해주세요.",
+                        false
+                    )
                     return
                 }
 
@@ -351,35 +420,119 @@ class EditKataActivity : AppCompatActivity() {
 
                 val sKataIndo = et1!!.text.toString()
                 val sFile = "$sKataIndo.aac"
-                val saveFolder = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), sFile)
+                val saveFolder = File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC),
+                    sFile
+                )
 
                 if (saveFolder == null) {
-                    BahasaApplication.getInstance().Toast(this@EditKataActivity, "녹음된 파일이 존재하지 않습니다.", false)
+                    BahasaApplication.getInstance().Toast(
+                        this@EditKataActivity,
+                        "녹음된 파일이 존재하지 않습니다.",
+                        false
+                    )
                     return
                 }
 
-                if (audioRecorder!!.isRecording()) {
-                    return
+                if (audioRecorder != null) {
+                    if (audioRecorder!!.isRecording()) {
+                        return
+                    }
                 }
 
-                if (audioPlayer!!.isPlaying()) {
-                    lblRecord!!.text = "녹음내용 미리 듣기 중입니다."
+                if (audioPlayer != null) {
+                    if (audioPlayer!!.isPlaying()) {
+                        return
+                    }
                 }
 
-                /*
+                audioPlayer!!.init()
                 audioPlayer!!.play(saveFolder.path, object : AudioPlayer.OnMediaPlayerListener {
                     override fun onCompletion(bComplete: Boolean) {
-                        Log.e(tag, "녹음된 내용을 전부 들었습니다.")
+
+                        //Log.e(tag, "녹음된 내용을 전부 들었습니다.")
+
+                        lblRecord!!.text = "버튼을 클릭하면 녹음이 시작됩니다."
+                        stopplayerTimer()
+                        initDisplaytime()
+
+                        val duration = audioPlayer!!.getDuration()
+                        pb1!!.progress = 0
+                        pb1!!.max = duration
                     }
 
                     override fun onPrepared(mDuration: Int) {
-                        Log.e(tag, "녹음된 파일이 준비가 되었습니다.")
+
+                        //Log.e(tag, "녹음된 파일이 준비가 되었습니다.")
+
+                        initDisplaytime()
                     }
                 })
-                */
 
+                lblRecord!!.text = "녹음내용 미리 듣기 중입니다."
+                audioPlayer!!.start()
+                setSeekBarProgress()
             }
         })
+    }
+
+    private fun setSeekBarProgress() {
+
+        stopplayerTimer()
+
+        playerTimer = PlayerTimer()
+        playerTimer!!.setCallback(object : PlayerTimer.Callback {
+            override fun onTick(timeMillis: Long) {
+
+                if (audioPlayer == null) return
+
+                val position = audioPlayer!!.getCurrentPosition()
+                val duration = audioPlayer!!.getDuration()
+
+                if (duration <= 0) return
+
+                pb1!!.max = duration
+                pb1!!.progress = position
+
+                val nEndTime = duration / 1000
+                val nEndMinutes = nEndTime / 60 % 60
+                val nEndSeconds = nEndTime % 60
+
+                val nCurrentTime = position / 1000
+                val nCurrentMinutes = nCurrentTime / 60 % 60
+                val nCurrentSeconds = nCurrentTime % 60
+
+                currentTime!!.text = String.format("%02d:%02d", nCurrentMinutes, nCurrentSeconds)
+                totalTime!!.text = String.format("%02d:%02d", nEndMinutes, nEndSeconds)
+            }
+        })
+        playerTimer!!.start()
+    }
+
+    private fun stopplayerTimer() {
+
+        if (playerTimer != null) {
+            playerTimer!!.stop()
+            playerTimer!!.removeMessages(0)
+        }
+    }
+
+    private fun initDisplaytime() {
+
+        if (audioPlayer == null)
+            return
+
+        val nEndTime = audioPlayer!!.getDuration() / 1000
+        val nEndMinutes = nEndTime / 60 % 60
+        val nEndSeconds = nEndTime % 60
+
+        val nCurrentTime = audioPlayer!!.getCurrentPosition() / 1000
+        val nCurrentMinutes = nCurrentTime / 60 % 60
+        val nCurrentSeconds = nCurrentTime % 60
+
+        //currentTime!!.text = String.format("%02d:%02d", nCurrentMinutes, nCurrentSeconds)
+        currentTime!!.text = String.format("00:00", nCurrentMinutes, nCurrentSeconds)
+        totalTime!!.text = String.format("%02d:%02d", nEndMinutes, nEndSeconds)
     }
 
     private fun InitData() {

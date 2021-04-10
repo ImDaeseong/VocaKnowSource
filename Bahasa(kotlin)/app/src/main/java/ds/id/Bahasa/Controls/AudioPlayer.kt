@@ -26,13 +26,18 @@ class AudioPlayer {
         }
     }
 
+    fun init() {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer()
+        }
+    }
+
     fun release() {
         try {
 
             removeListener()
 
             if (mediaPlayer != null) {
-                mediaPlayer!!.stop()
                 mediaPlayer!!.release()
                 mediaPlayer = null
             }
@@ -76,7 +81,6 @@ class AudioPlayer {
     fun stop() {
         if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
             mediaPlayer!!.stop()
-            mediaPlayer!!.reset()
         }
     }
 
