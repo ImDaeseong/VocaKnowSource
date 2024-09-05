@@ -29,7 +29,6 @@ import ds.id.Bahasa.Controls.UnitUtils;
 import ds.id.Bahasa.Database.KataManager;
 import ds.id.Bahasa.Database.regkataItems;
 
-
 public class Fragment3 extends Fragment {
 
     private static final String TAG = Fragment3.class.getSimpleName();

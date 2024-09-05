@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ds.id.Bahasa.Database.regkataItems
 
-
 class RegKataAdapter(private val context: Context, private val list: List<regkataItems>?) : RecyclerView.Adapter<RegKataAdapter.ViewHolder>() {
 
     private val tag = RegKataAdapter::class.java.simpleName
